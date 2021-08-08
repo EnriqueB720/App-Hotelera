@@ -1,64 +1,49 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Habitacion } from './tab1.model';
+import { Habitacion, Localidad } from './tab1.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HotelService {
-  private habitaciones: Habitacion[] = [
+  private habitaciones: Habitacion[] = [];
+  private localidades: Localidad[] = [
     {
-      id: 'entry-1',
-      ubicacion: 'Guanacaste',
-      numeroHabitacion: 1,
-      imagenes: [
-                  'https://ar.zoetis.com/_locale-assets/mcm-portal-assets/publishingimages/especie/caninos_perro_img.png',
-                  'https://ar.zoetis.com/_locale-assets/mcm-portal-assets/publishingimages/especie/caninos_perro_img.png'
-                ],
-      cantidadPersonas: 4,
-      cantidadCuartos: 2,
-      tipo: 'mediana',
-      precioXNoche: 100000
+      nombre: 'Guanacaste',
+      imagen: 'assets/images/Guanacaste.jpg'
     },
     {
-      id: 'entry-2',
-      ubicacion: 'Puntarenas',
-      numeroHabitacion: 1,
-      imagenes: [
-                  'https://ar.zoetis.com/_locale-assets/mcm-portal-assets/publishingimages/especie/caninos_perro_img.png',
-                  'https://ar.zoetis.com/_locale-assets/mcm-portal-assets/publishingimages/especie/caninos_perro_img.png'
-                ],
-      cantidadPersonas: 4,
-      cantidadCuartos: 2,
-      tipo: 'mediana',
-      precioXNoche: 50000
+      nombre: 'Puntarenas',
+      imagen: 'assets/images/Puntarenas.jpg'
     },
     {
-      id: 'entry-3',
-      ubicacion: 'Limon',
-      numeroHabitacion: 1,
-      imagenes: [
-                  'https://ar.zoetis.com/_locale-assets/mcm-portal-assets/publishingimages/especie/caninos_perro_img.png',
-                  'https://ar.zoetis.com/_locale-assets/mcm-portal-assets/publishingimages/especie/caninos_perro_img.png'
-                ],
-      cantidadPersonas: 4,
-      cantidadCuartos: 2,
-      tipo: 'mediana',
-      precioXNoche: 70000
+      nombre: 'Limon',
+      imagen: 'assets/images/Limon.jpg'
     },
     {
-      id: 'entry-4',
-      ubicacion: 'San Jose',
-      numeroHabitacion: 1,
-      imagenes: [
-                  'https://ar.zoetis.com/_locale-assets/mcm-portal-assets/publishingimages/especie/caninos_perro_img.png',
-                  'https://ar.zoetis.com/_locale-assets/mcm-portal-assets/publishingimages/especie/caninos_perro_img.png'
-                ],
-      cantidadPersonas: 4,
-      cantidadCuartos: 2,
-      tipo: 'mediana',
-      precioXNoche: 800000
+      nombre: 'San Jose',
+      imagen: 'assets/images/San Jose.jpg'
     },
   ];
 
-  constructor() { }
+  constructor(
+    private httpClient: HttpClient
+  ) { }
+  agregarHabitacion(id: string, ubicacion: string, numeroHabitacion: number, imagenes: string[],
+                    cantidadPersonas: number, cantidadCuartos: number, tipo: string, precioXNoche: number){
+    const nuevaHabitacion = new Habitacion(
+      id,
+      ubicacion,
+      numeroHabitacion,
+      imagenes,
+      cantidadPersonas,
+      cantidadCuartos,
+      tipo,
+      precioXNoche
+    );
+    this.httpClient.post('https://hotel-105b0-default-rtdb.firebaseio.com/habitaciones.json', { ...nuevaHabitacion, id:  null });
+  }
+  getlocalidades(){
+    return [...this.localidades];
+  }
 }

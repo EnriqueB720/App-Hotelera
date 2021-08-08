@@ -1,84 +1,31 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-searchbar animated showClearButton="always" placeholder="Buscar Habitación"></ion-searchbar>
+    <ion-buttons id="agregar" slot="end">
+      <ion-button fill="outline" size="small" color="primary" [routerLink]="['./agregar']">Agregar</ion-button>
+    </ion-buttons>
+    <ion-searchbar animated showClearButton="always" placeholder="Buscar"></ion-searchbar>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <ion-grid>
+
     <ion-row>
       <strong class="title">Ubicación</strong>
       <ion-col>
         <ion-slides pager="false">
-          <ion-slide>
+          <ion-slide *ngFor =" let localidad of localidades">
             <ion-card>
               <ion-card-header>
-                <ion-img src="assets/images/Guanacaste.jpg"></ion-img>
+                <ion-img src="{{localidad.imagen}}"></ion-img>
               </ion-card-header>
               <ion-card-content>
                 <ion-grid>
                   <ion-row>
                     <ion-col size="4">
-                      <p>Guanacaste</p>
+                      <p>{{localidad.nombre}}</p>
                     </ion-col>
-                    <ion-col offset="4" size="3">
-                      <ion-button fill="outline" size="small">Reservar</ion-button>
-                    </ion-col>
-                  </ion-row>
-                </ion-grid>
-              </ion-card-content>
-            </ion-card>
-          </ion-slide>
-          <ion-slide>
-            <ion-card>
-              <ion-card-header>
-                <ion-img src="assets/images/Puntarenas.jpg"></ion-img>
-              </ion-card-header>
-              <ion-card-content>
-                <ion-grid>
-                  <ion-row>
-                    <ion-col size="4">
-                      <p>Puntarenas</p>
-                    </ion-col>
-                    <ion-col offset="4" size="3">
-                      <ion-button fill="outline" size="small">Reservar</ion-button>
-                    </ion-col>
-                  </ion-row>
-                </ion-grid>
-              </ion-card-content>
-            </ion-card>
-          </ion-slide>
-          <ion-slide>
-            <ion-card>
-              <ion-card-header>
-                <ion-img src="assets/images/Limon.jpg"></ion-img>
-              </ion-card-header>
-              <ion-card-content>
-                <ion-grid>
-                  <ion-row>
-                    <ion-col size="4">
-                      <p>Limón</p>
-                    </ion-col>
-                    <ion-col offset="4" size="3">
-                      <ion-button fill="outline" size="small">Reservar</ion-button>
-                    </ion-col>
-                  </ion-row>
-                </ion-grid>
-              </ion-card-content>
-            </ion-card>
-          </ion-slide>
-          <ion-slide>
-            <ion-card>
-              <ion-card-header>
-                <ion-img src="assets/images/San Jose.jpg"></ion-img>
-              </ion-card-header>
-              <ion-card-content>
-                <ion-grid>
-                  <ion-row>
-                    <ion-col size="4">
-                      <p>San José</p>
-                    </ion-col>
-                    <ion-col offset="4" size="3">
+                    <ion-col offset="3" size="3">
                       <ion-button fill="outline" size="small">Reservar</ion-button>
                     </ion-col>
                   </ion-row>
@@ -89,6 +36,9 @@
         </ion-slides>
       </ion-col>
     </ion-row>
+
+
+
     <ion-row>
       <strong class="title">Tipo</strong>
       <ion-col>

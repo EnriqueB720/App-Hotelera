@@ -20,3 +20,7 @@ export class Habitacion{
     public precioXNoche: number
   ){}
 }
+export interface Localidad{
+  nombre: string;
+  imagen: string;
+}

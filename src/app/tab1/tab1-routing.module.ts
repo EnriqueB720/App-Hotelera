@@ -10,6 +10,10 @@ const routes: Routes = [
   {
     path: 'lista',
     loadChildren: () => import('./lista/lista.module').then( m => m.ListaPageModule)
+  },
+  {
+    path: 'agregar',
+    loadChildren: () => import('./agregar/agregar.module').then( m => m.AgregarPageModule)
   }
 ];
 
