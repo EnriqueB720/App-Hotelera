@@ -6,7 +6,15 @@ const routes: Routes = [
   {
     path: '',
     component: Tab3Page,
+  },  {
+    path: 'login-page',
+    loadChildren: () => import('./login-page/login-page.module').then( m => m.LoginPagePageModule)
+  },
+  {
+    path: 'register-page',
+    loadChildren: () => import('./register-page/register-page.module').then( m => m.RegisterPagePageModule)
   }
+
 ];
 
 @NgModule({
