@@ -1,17 +1,39 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Tab 3
-    </ion-title>
+    <ion-grid>
+      <ion-row>
+        <ion-col size="9">
+          <ion-title id="profile-title">
+            Tu Perfil
+          </ion-title>
+        </ion-col>
+        <ion-col size="3">
+          <ion-avatar>
+            <ion-img src="assets/images/default-user.png" id="user-logo"></ion-img>
+          </ion-avatar>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 3</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<!--Sin usuario logueado-->
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12">
+        Incia sesión y comienza a planificar donde hospedarte!
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-button id="sing-in-button" [routerLink] = "['./']">Iniciar Sesión</ion-button>
+        ¿No tienes cuenta?
+        <ion-button id= "sing-up-button" color="secondary" [routerLink] = "['./']">Regístrarse</ion-button>
+      </ion-col>
+    </ion-row>
+    <p id="footer-text"> Todos los derechos reservados.</p>
+  </ion-grid>
+<!--Con usuario logueado-->
 
-  <app-explore-container name="Tab 3 page"></app-explore-container>
 </ion-content>

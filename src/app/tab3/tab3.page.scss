@@ -1,0 +1,28 @@
+#user-logo{
+  height: 50px;
+  width: 50px;
+  margin-top: 6px;
+}
+#profile-title{
+  transform: translateY(59%);
+  font-size: 24px;
+  color: black;
+}
+ion-header,ion-toolbar{
+  height: 80px;
+}
+ion-col{
+  font-family: Arial, "Times New Roman";
+  color: gray;
+  font-size: 18px;
+}
+#sing-in-button, #sing-up-button{
+  width: 320px;
+  margin-bottom: 10px;
+}
+#footer-text{
+  text-align:center;
+   font-size:15px;
+   color: gray;
+}
+
