@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FirebaseServiceService } from 'src/app/tabs/firebase-service.service';
+import { AlertController } from '@ionic/angular';
+
 
 
 @Component({
@@ -10,7 +13,9 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class RegisterPagePage implements OnInit {
   signUpForm: FormGroup;
-  constructor(private router: Router) { }
+  constructor(private router: Router,
+              private firebase: FirebaseServiceService,
+              private alertCtrl: AlertController) { }
 
   ngOnInit() {
     this.signUpForm = new FormGroup({
@@ -24,11 +29,11 @@ export class RegisterPagePage implements OnInit {
       }),
       email: new FormControl(null,{
         updateOn: 'blur',
-        validators: [Validators.required]
+        validators: [Validators.required, Validators.email]
       }),
       password: new FormControl(null,{
         updateOn: 'blur',
-        validators: [Validators.required]
+        validators: [Validators.required, Validators.minLength(8)]
       }),
       confirmedPassword: new FormControl(null,{
         updateOn: 'blur',
@@ -37,6 +42,31 @@ export class RegisterPagePage implements OnInit {
     });
   }
 
+  newUser(){
+    if(!this.signUpForm.valid) return;
+    if(this.signUpForm.value.confirmedPassword !== this.signUpForm.value.password){
+        this.alertCtrl.create({
+           header: 'Alerta',
+           message: 'Confirme su contraseña correctamente',
+           buttons:[{
+              text: 'Aceptar',
+             role: 'cancel'
+          }]
+         }).then(
+           alertElement => {
+             alertElement.present();
+           }
+         );
+     }else{
+       this.firebase.addUser(
+          this.signUpForm.value.fullName,
+          this.signUpForm.value.phoneNumber,
+          this.signUpForm.value.email,
+          this.signUpForm.value.password
+        )
+     }
+     this.router.navigate(['/tabs/tab3']);
+  }
   //Funcion para regresar al tab principal
   regresar(){
     this.router.navigate(['/tabs/tab3']);

@@ -37,7 +37,7 @@
          Telefono
        </ion-label>
        <ion-input type="number" autocomplete autocorrect placeholder="00000000" formControlName="phoneNumber"></ion-input>
-     </ion-item>
+      </ion-item>
     </ion-col>
   </ion-row>
   <ion-row>
@@ -47,7 +47,7 @@
          Correo Electronico
        </ion-label>
        <ion-input type="email" autocomplete autocorrect placeholder="ejemplo@ejemplo.com" formControlName="email"></ion-input>
-     </ion-item>
+      </ion-item>
     </ion-col>
   </ion-row>
   <ion-row>
@@ -56,8 +56,8 @@
        <ion-label position="floating">
          Constraseña
        </ion-label>
-       <ion-input type="password" autocomplete autocorrect placeholder="Contraseña" formControlName="password"></ion-input>
-     </ion-item>
+       <ion-input type="password" autocomplete autocorrect placeholder="Mínimo 8 Caracteres" formControlName="password"></ion-input>
+      </ion-item>
     </ion-col>
   </ion-row>
   <ion-row>
@@ -67,12 +67,12 @@
          Confirmar Constraseña
        </ion-label>
        <ion-input type="password" autocomplete autocorrect placeholder="Confirmar Contraseña" formControlName="confirmedPassword"></ion-input>
-     </ion-item>
+      </ion-item>
     </ion-col>
   </ion-row>
   <ion-row>
     <ion-col style="text-align:center;">
-      <ion-button id="sign-up-button" color="secondary">Registrarse!</ion-button>
+      <ion-button id="sign-up-button" color="secondary" (click)= "newUser()" >Registrarse!</ion-button>
     </ion-col>
   </ion-row>
   <p id="footer-text"> Todos los derechos reservados.</p>

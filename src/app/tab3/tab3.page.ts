@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { FirebaseServiceService } from '../tabs/firebase-service.service';
+import { User } from './user.model';
 
 @Component({
   selector: 'app-tab3',
@@ -6,7 +8,14 @@ import { Component } from '@angular/core';
   styleUrls: ['tab3.page.scss']
 })
 export class Tab3Page {
+  public user: User[];
+  constructor(public firebaseService: FirebaseServiceService) {}
 
-  constructor() {}
+  ngOnInit() {
 
+  }
+  ionViewWillEnter(){
+    this.user =  this.firebaseService.getUser();
+    console.log(this.user[0].fullName);
+  }
 }
