@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FirebaseServiceService } from '../tabs/firebase-service.service';
 import { User} from './user.model';
 
@@ -7,16 +7,14 @@ import { User} from './user.model';
   templateUrl: 'tab3.page.html',
   styleUrls: ['tab3.page.scss']
 })
-export class Tab3Page implements OnInit{
+export class Tab3Page{
   username: string = "";
   rol: string = " ";
   user: User[];
   constructor(public firebaseService: FirebaseServiceService) {}
 
   ngOnInit() {
-    setTimeout(()=>{
-     // this.username =  this.user[0].fullName;
-    },2000);
+
   }
   ionViewWillEnter(){
     if(this.firebaseService.userlogued[0] !== undefined){

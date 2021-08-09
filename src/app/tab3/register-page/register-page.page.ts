@@ -25,7 +25,7 @@ export class RegisterPagePage implements OnInit {
       }),
       phoneNumber: new FormControl(null,{
         updateOn: 'blur',
-        validators: [Validators.required,Validators.max(8)]
+        validators: [Validators.required,Validators.maxLength(8)]
       }),
       email: new FormControl(null,{
         updateOn: 'blur',
@@ -65,7 +65,7 @@ export class RegisterPagePage implements OnInit {
           this.signUpForm.value.password
         )
      }
-     this.router.navigate(['/tabs/tab3']);
+     this.router.navigate(['/tabs/tab3/login-page']);
   }
   //Funcion para regresar al tab principal
   regresar(){
