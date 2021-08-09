@@ -48,6 +48,7 @@
        </ion-label>
        <ion-input type="email" autocomplete autocorrect placeholder="ejemplo@ejemplo.com" formControlName="email"></ion-input>
       </ion-item>
+      <p *ngIf= "errorControl === 1" id="alert-text">Este correo electronico ya esta en uso.</p>
     </ion-col>
   </ion-row>
   <ion-row>

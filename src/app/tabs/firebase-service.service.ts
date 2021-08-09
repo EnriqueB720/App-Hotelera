@@ -9,11 +9,11 @@ export class FirebaseServiceService {
 private users: User[] = [];
 public userlogued: User[] = [];
   constructor(private httpClient: HttpClient) {
-    this.users = this.getUser();
+    this.users = this.getUsers();
    }
 
 //Tomar todos los usuarios
-  getUser(){
+  getUsers(){
     this.httpClient.get<{ [key: string]: User }>("https://hotel-be340-default-rtdb.firebaseio.com/usuario.json")
     .subscribe(
         restData => {
@@ -49,15 +49,26 @@ logIn(email: string, password: string){
 }
 //Registrar nuevo usuario
   addUser(fullName: string, phoneNumber: string, email: string, password: string){
+      const userExist: User[] = this.getUsers();
       const newUser = new User('',fullName, phoneNumber, email, password, 'user');
+
+      if(userExist.find(
+        usuarios =>{
+          return usuarios.email === email;
+        }
+      ) === undefined){
       this.httpClient.post<{name: string}>("https://hotel-be340-default-rtdb.firebaseio.com/usuario.json", {
-      ...newUser
-    }).subscribe(
-      (restData) =>{
-        newUser.id = restData.name;
+       ...newUser
+       }).subscribe(
+       (restData) =>{
+         newUser.id = restData.name;
+       }
+        );
+        this.users.push(newUser);
+        return true;
+      }else{
+        return false;
       }
-    );
-    this.users.push(newUser);
   }
 
 }

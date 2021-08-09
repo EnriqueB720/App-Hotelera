@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { FirebaseServiceService } from 'src/app/tabs/firebase-service.service';
-import { AlertController } from '@ionic/angular';
+import { AlertController} from '@ionic/angular';
 
 
 
@@ -13,6 +13,7 @@ import { AlertController } from '@ionic/angular';
 })
 export class RegisterPagePage implements OnInit {
   signUpForm: FormGroup;
+  errorControl: Number= 0;
   constructor(private router: Router,
               private firebase: FirebaseServiceService,
               private alertCtrl: AlertController) { }
@@ -58,14 +59,17 @@ export class RegisterPagePage implements OnInit {
            }
          );
      }else{
-       this.firebase.addUser(
+       if(this.firebase.addUser(
           this.signUpForm.value.fullName,
           this.signUpForm.value.phoneNumber,
           this.signUpForm.value.email,
           this.signUpForm.value.password
-        )
+        ) === false){
+          this.errorControl = 1;
+        }else{
+          this.router.navigate(['/tabs/tab3/login-page']);
+        }
      }
-     this.router.navigate(['/tabs/tab3/login-page']);
   }
   //Funcion para regresar al tab principal
   regresar(){
