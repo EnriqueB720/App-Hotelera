@@ -4,7 +4,7 @@
   margin-top: 6px;
 }
 #profile-title{
-  transform: translateY(59%);
+  margin-top: 10px;
   font-size: 24px;
   color: black;
 }
@@ -24,9 +24,17 @@ ion-col{
   text-align:center;
    font-size:15px;
    color: gray;
+   margin-top: 50px;
 }
 
 #profile-title-user{
-  font-size: 18px;
+  font-size: 17px;
   color: black;
+  margin-top: 20px;
+  text-align: center;
+}
+@media screen and (max-width: 320px) {
+  #profile-title{
+    font-size: 18px;
+  }
 }
