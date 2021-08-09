@@ -19,7 +19,7 @@
 
 <ion-content [fullscreen]="true">
 <!--Sin usuario logueado-->
-  <ion-grid>
+  <ion-grid *ngIf = " rol !== 'admin'">
     <ion-row>
       <ion-col size="12">
         Incia sesión y comienza a planificar donde hospedarte!
@@ -32,7 +32,8 @@
         <ion-button id= "sign-up-button" color="secondary" [routerLink] = "['./register-page']">Regístrarse</ion-button>
       </ion-col>
     </ion-row>
-    <p id="footer-text"> Todos los derechos reservados. {{user[0].fullName}}</p>
   </ion-grid>
+  <p id="footer-text"> Todos los derechos reservados. {{username}}</p>
 <!--Con usuario logueado-->
+
 </ion-content>

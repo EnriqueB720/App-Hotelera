@@ -25,7 +25,7 @@ export class RegisterPagePage implements OnInit {
       }),
       phoneNumber: new FormControl(null,{
         updateOn: 'blur',
-        validators: [Validators.required,Validators.maxLength(8)]
+        validators: [Validators.required,Validators.max(8)]
       }),
       email: new FormControl(null,{
         updateOn: 'blur',

@@ -6,11 +6,13 @@ import { HttpClient } from '@angular/common/http'
   providedIn: 'root'
 })
 export class FirebaseServiceService {
-private user: User[] = [];
+private users: User[] = [];
+public userlogued: User[] = [];
   constructor(private httpClient: HttpClient) {
-    this.user = this.getUser();
+    this.users = this.getUser();
    }
 
+//Tomar todos los usuarios
   getUser(){
     this.httpClient.get<{ [key: string]: User }>("https://hotel-be340-default-rtdb.firebaseio.com/usuario.json")
     .subscribe(
@@ -28,15 +30,26 @@ private user: User[] = [];
                 ));
             }
           }
-          this.user = user;
-          console.log(this.user[0].fullName);
+          this.users = user;
         }
     );
-    return [...this.user]
+    return [...this.users]
   }
 
+//Buscar usuario logueado
+logIn(email: string, password: string){
+
+  this.userlogued.push(this.users.find(
+    (usuario)=>{
+   return usuario.email === email && usuario.password === password;
+  }
+  ));
+  return [...this.userlogued];
+
+}
+//Registrar nuevo usuario
   addUser(fullName: string, phoneNumber: string, email: string, password: string){
-      const newUser = new User('',fullName, phoneNumber, email, password, 'admin');
+      const newUser = new User('',fullName, phoneNumber, email, password, 'user');
       this.httpClient.post<{name: string}>("https://hotel-be340-default-rtdb.firebaseio.com/usuario.json", {
       ...newUser
     }).subscribe(
@@ -44,7 +57,7 @@ private user: User[] = [];
         newUser.id = restData.name;
       }
     );
-    this.user.push(newUser);
+    this.users.push(newUser);
   }
 
 }
