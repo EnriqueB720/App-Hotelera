@@ -38,7 +38,7 @@ public userlogued: User[] = [];
 
 //Buscar usuario logueado
 logIn(email: string, password: string){
-
+  this.userlogued.pop();
   this.userlogued.push(this.users.find(
     (usuario)=>{
    return usuario.email === email && usuario.password === password;

@@ -9,7 +9,7 @@
           <ion-title id="profile-title" *ngIf= "rol === 'admin'">
             Administrador
           </ion-title>
-          <ion-title id="profile-title" *ngIf= "rol === 'user'">
+          <ion-title id="profile-title-user" *ngIf= "rol === 'user'">
             {{username}}
           </ion-title>
         </ion-col>
@@ -41,5 +41,7 @@
   </ion-grid>
   <p id="footer-text"> Todos los derechos reservados.</p>
 <!--Con usuario logueado-->
+  <ion-grid *ngIf= "rol === 'admin' || rol === 'user'  ">
 
+  </ion-grid>
 </ion-content>

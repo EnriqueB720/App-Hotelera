@@ -13,7 +13,7 @@ import { User } from '../user.model';
 })
 export class LoginPagePage implements OnInit {
   signInForm: FormGroup;
-  user: User[];
+  user: User[] = [];
   constructor(private router: Router,
     private firebase: FirebaseServiceService,
     private alertCtrl: AlertController,
@@ -34,9 +34,8 @@ export class LoginPagePage implements OnInit {
 
   logueIn(){
     if(!this.signInForm.valid) return;
-    this.user = this.firebase.logIn(this.signInForm.value.email,this.signInForm.value.password);
-    if(this.user[0].email !== this.signInForm.value.email ||
-      this.user[0].password !== this.signInForm.value.password ){
+    this.user[0] = this.firebase.logIn(this.signInForm.value.email,this.signInForm.value.password)[0];
+    if(this.user[0] === undefined ){
         this.alertCtrl.create({
           header: 'Alerta',
           message: 'Correo electronico o Contraseña incorrectos',
