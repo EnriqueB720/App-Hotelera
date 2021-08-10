@@ -47,6 +47,10 @@ logIn(email: string, password: string){
   return [...this.userlogued];
 
 }
+LogOut(){
+  this.userlogued.pop();
+  return true;
+}
 //Registrar nuevo usuario
   addUser(fullName: string, phoneNumber: string, email: string, password: string){
       const userExist: User[] = this.getUsers();

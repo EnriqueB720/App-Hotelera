@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { FirebaseServiceService } from '../tabs/firebase-service.service';
 import { User} from './user.model';
 
@@ -12,12 +13,15 @@ export class Tab3Page{
   rol: string = " ";
   phoneNumber: string = "";
   user: User[];
-  constructor(public firebaseService: FirebaseServiceService) {}
+  constructor(public firebaseService: FirebaseServiceService,
+              private router: Router) {}
 
   ngOnInit() {
-    if(this.username.length < 8 && this.rol !== ' '){
-      document.getElementById("profile-title-user").setAttribute("style" , "font-size: 50px;");
-      console.log("entro");
+
+  }
+  ionViewDidEnter(){
+    if(this.username.length < 8 && this.rol === 'user'){
+      document.getElementById("profile-title-user").setAttribute("style" , "font-size: 23px; ");
     }
   }
   ionViewWillEnter(){
@@ -29,6 +33,14 @@ export class Tab3Page{
     }
   }
   logOut(){
-
+    if(this.firebaseService.LogOut()){
+      this.user.pop();
+      this.rol = " ";
+      this.username = " ";
+      this.phoneNumber = " ";
+      this.router.navigate(['/tabs/tab1']);
+    }else{
+      return;
+    }
   }
 }

@@ -9,7 +9,7 @@
           <ion-title id="profile-title" *ngIf= "rol === 'admin'">
             Administrador
           </ion-title>
-          <ion-title  id="profile-title-user" *ngIf= "rol === 'user'">
+          <ion-title  id="profile-title-user"  *ngIf= "rol === 'user'">
             {{username}}
           </ion-title>
         </ion-col>
@@ -53,7 +53,7 @@
         <ion-title style="color:black">Informacion de la cuenta.</ion-title>
         <ion-card>
           <ion-card-header>
-             <ion-card-title>Correo electronico: {{user[0].email}}</ion-card-title>
+             <ion-card-title>Correo electronico: <u>{{user[0].email}}</u></ion-card-title>
           </ion-card-header>
           <ion-card-content>
             <ion-grid>
