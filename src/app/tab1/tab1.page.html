@@ -9,9 +9,13 @@
 
 <ion-content [fullscreen]="true">
   <ion-grid>
-
     <ion-row>
-      <strong class="title">Ubicación</strong>
+      <ion-col>
+        <ion-buttons>
+          <strong class="title">Ubicación</strong>
+          <ion-button id="todos" fill="outline" size="small" color="primary" [routerLink]="['./lista']">Ver Todos</ion-button>
+        </ion-buttons>
+      </ion-col>
       <ion-col>
         <ion-slides pager="false">
           <ion-slide *ngFor =" let localidad of localidades">
@@ -25,8 +29,8 @@
                     <ion-col size="4">
                       <p>{{localidad.nombre}}</p>
                     </ion-col>
-                    <ion-col offset="3" size="3">
-                      <ion-button fill="outline" size="small">Reservar</ion-button>
+                    <ion-col offset="4" size="3">
+                      <ion-button fill="outline" size="small">Filtrar</ion-button>
                     </ion-col>
                   </ion-row>
                 </ion-grid>
@@ -36,64 +40,24 @@
         </ion-slides>
       </ion-col>
     </ion-row>
-
-
 
     <ion-row>
       <strong class="title">Tipo</strong>
       <ion-col>
         <ion-slides pager="false">
-          <ion-slide>
+          <ion-slide *ngFor =" let tipo of tipos">
             <ion-card>
               <ion-card-header>
-                <ion-img src="assets/images/Suite.jpg"></ion-img>
+                <ion-img src="{{tipo.imagen}}"></ion-img>
               </ion-card-header>
               <ion-card-content>
                 <ion-grid>
                   <ion-row>
                     <ion-col size="4">
-                      <p>Suite</p>
+                      <p>{{tipo.tipo}}</p>
                     </ion-col>
                     <ion-col offset="4" size="3">
-                      <ion-button fill="outline" size="small">Reservar</ion-button>
-                    </ion-col>
-                  </ion-row>
-                </ion-grid>
-              </ion-card-content>
-            </ion-card>
-          </ion-slide>
-          <ion-slide>
-            <ion-card>
-              <ion-card-header>
-                <ion-img src="assets/images/Mediana.jpg"></ion-img>
-              </ion-card-header>
-              <ion-card-content>
-                <ion-grid>
-                  <ion-row>
-                    <ion-col size="4">
-                      <p>Mediana</p>
-                    </ion-col>
-                    <ion-col offset="4" size="3">
-                      <ion-button fill="outline" size="small">Reservar</ion-button>
-                    </ion-col>
-                  </ion-row>
-                </ion-grid>
-              </ion-card-content>
-            </ion-card>
-          </ion-slide>
-          <ion-slide>
-            <ion-card>
-              <ion-card-header>
-                <ion-img src="assets/images/Pequeña.jpg"></ion-img>
-              </ion-card-header>
-              <ion-card-content>
-                <ion-grid>
-                  <ion-row>
-                    <ion-col size="4">
-                      <p>Pequeña</p>
-                    </ion-col>
-                    <ion-col offset="4" size="3">
-                      <ion-button fill="outline" size="small">Reservar</ion-button>
+                      <ion-button fill="outline" size="small">Filtrar</ion-button>
                     </ion-col>
                   </ion-row>
                 </ion-grid>
@@ -103,5 +67,7 @@
         </ion-slides>
       </ion-col>
     </ion-row>
+
+
   </ion-grid>
 </ion-content>

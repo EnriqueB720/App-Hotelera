@@ -1,12 +1,12 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="tabs/tab1"></ion-back-button>
+      <ion-back-button color="primary" defaultHref="tabs/tab1"></ion-back-button>
     </ion-buttons>
     <ion-title slot="start">Agregar Habitación</ion-title>
     <ion-buttons slot="end">
       <ion-button (click)="funcionAgregar()">
-        <ion-icon name="add-outline"></ion-icon>
+        <ion-icon color="primary"name="add-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
@@ -19,7 +19,7 @@
         <ion-col size-sm="6" offset-sm="3">
           <ion-item>
             <ion-label position="floating">Numero de Habitacion</ion-label>
-            <ion-input type="number" autocomplete autocorrect formControlName="numeroHabitacion"></ion-input>
+            <ion-input type="number" autocomplete autocorrect placeholder="Digite el numero de habitacion" formControlName="numeroHabitacion"></ion-input>
           </ion-item>
         </ion-col>
       </ion-row>
@@ -27,23 +27,12 @@
         <ion-col size-sm="6" offset-sm="3">
           <ion-item>
             <ion-label position="floating">Ubicacion</ion-label>
-            <ion-textarea row="4" formControlName="ubicacion"></ion-textarea>
-          </ion-item>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col size-sm="6" offset-sm="3">
-          <ion-item>
-            <ion-label position="floating">Cantidad de Personas</ion-label>
-            <ion-input type="number" autocomplete autocorrect formControlName="cantidadPersonas"></ion-input>
-          </ion-item>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col size-sm="6" offset-sm="3">
-          <ion-item>
-            <ion-label position="floating">Cantidad de Cuartos</ion-label>
-            <ion-input type="number" autocomplete autocorrect formControlName="cantidadCuartos"></ion-input>
+            <ion-select formControlName="ubicacion" placeholder="Elija una opcion">
+              <ion-select-option value="Guanacaste">Guanacaste</ion-select-option>
+              <ion-select-option value="Puntarenas">Puntarenas</ion-select-option>
+              <ion-select-option value="Limón">Limón</ion-select-option>
+              <ion-select-option value="San Jose">San José</ion-select-option>
+            </ion-select>
           </ion-item>
         </ion-col>
       </ion-row>
@@ -51,7 +40,11 @@
         <ion-col size-sm="6" offset-sm="3">
           <ion-item>
             <ion-label position="floating">Tipo de habitacion</ion-label>
-            <ion-input type="text" autocomplete autocorrect formControlName="tipo"></ion-input>
+            <ion-select formControlName="tipo" placeholder="Elija una opcion">
+              <ion-select-option value="Suite">Suite</ion-select-option>
+              <ion-select-option value="Mediana">Mediana</ion-select-option>
+              <ion-select-option value="Pequeña">Pequeña</ion-select-option>
+            </ion-select>
           </ion-item>
         </ion-col>
       </ion-row>
@@ -59,13 +52,15 @@
         <ion-col size-sm="6" offset-sm="3">
           <ion-item>
             <ion-label position="floating">Precio</ion-label>
-            <ion-input type="number" autocomplete autocorrect formControlName="precioXNoche"></ion-input>
+            <ion-input type="number" autocomplete autocorrect formControlName="precioXNoche" placeholder="Monto en dolares"></ion-input>
           </ion-item>
         </ion-col>
       </ion-row>
       <ion-row>
         <ion-col size-sm="6" offset-sm="3">
-          <p>La descripcion debe ser menor a 20 caracteres</p>
+          <ion-input type="hidden" formControlName="estado" value="Activa"></ion-input>
+          <ion-input type="hidden" formControlName="ocupacion" value="Desocupada"></ion-input>
+          <ion-input type="hidden" formControlName="id" value="0"></ion-input>
         </ion-col>
       </ion-row>
       <ion-row *ngIf="form.status !== 'VALID' ">
