@@ -8,15 +8,24 @@ import { Habitacion } from '../tab1.model';
   styleUrls: ['./lista.page.scss'],
 })
 export class ListaPage implements OnInit {
-  habitaciones: Habitacion[];
+  habitaciones: Habitacion[] = [];
   constructor(
     private hotelServicio: HotelService
-  ) { }
+  ) {}
 
   ngOnInit() {
-
-  }
-  ionViewWillEnter(){
     this.habitaciones = this.hotelServicio.getTodos();
   }
+  ionViewWillEnter(){
+    setTimeout(() => {
+      this.habitaciones = this.hotelServicio.getTodos();
+    }, 150);
+  }
+  doRefresh(event){
+    setTimeout(() => {
+      this.habitaciones = this.hotelServicio.getTodos();
+      event.target.complete();
+    }, 1000);
+  }
 }
+

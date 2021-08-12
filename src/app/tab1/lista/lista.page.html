@@ -8,10 +8,15 @@
 </ion-header>
 
 <ion-content>
-  <ion-list>
-    <ion-item *ngFor="let habitacion of habitaciones" [routerLink] = "['./tabs/tab1']">
-      <ion-avatar>
-        <ion-img src="https://pbs.twimg.com/media/EUdGvyXWoAA8GiD.jpg"></ion-img>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-list *ngIf="habitaciones[0] !== undefined">
+    <ion-item *ngFor="let habitacion of habitaciones" [routerLink] = "['./', habitacion.id]">
+      <ion-avatar >
+        <ion-img *ngIf="habitacion.tipo === 'Suite'" src="../assets/images/Suite.jpg"></ion-img>
+        <ion-img *ngIf="habitacion.tipo === 'Mediana'" src="../assets/images/Mediana.jpg"></ion-img>
+        <ion-img *ngIf="habitacion.tipo === 'Pequeña'" src="../assets/images/Pequeña.jpg"></ion-img>
       </ion-avatar>
       <ion-label>Numero: {{ habitacion.numeroHabitacion }} - {{ habitacion.tipo }} -  {{ habitacion.ubicacion }}</ion-label>
       <ion-icon color="primary" name="chevron-forward-outline"></ion-icon>

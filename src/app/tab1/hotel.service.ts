@@ -43,39 +43,17 @@ export class HotelService {
   constructor(
     private httpClient: HttpClient
   ) {
-    this.httpClient.get<{ [key: string]: Habitacion } >('https://hotel-105b0-default-rtdb.firebaseio.com/habitaciones.json')
-    .subscribe(
-      restData => {
-        const habitaciones = [];
-        for( const key in restData){
-          if( restData.hasOwnProperty(key) ){
-            habitaciones.push(new Habitacion(
-              key,
-              restData[key].ubicacion,
-              restData[key].numeroHabitacion,
-              restData[key].tipo,
-              restData[key].precioXNoche,
-              restData[key].estado,
-              restData[key].ocupacion
-            ));
-          }
-        }
-        this.habitaciones = habitaciones;
-      }
-    );
+    this.getTodos();
   }
   agregarHabitacion(id: string, ubicacion: string, numeroHabitacion: number, tipo: string, precioXNoche: number,
-                    estado: string, ocupacion: string){
-    estado = 'Activo';
-    ocupacion = 'Desocupada';
+                    estado: string){
     const nuevaHabitacion = new Habitacion(
       id,
       ubicacion,
       numeroHabitacion,
       tipo,
       precioXNoche,
-      estado,
-      ocupacion
+      estado
     );
     this.httpClient.post<{name: string}>('https://hotel-105b0-default-rtdb.firebaseio.com/habitaciones.json',
     {
@@ -88,6 +66,25 @@ export class HotelService {
     );
   }
   getTodos(){
+    this.httpClient.get<{ [key: string]: Habitacion } >('https://hotel-105b0-default-rtdb.firebaseio.com/habitaciones.json')
+    .subscribe(
+      restData => {
+        const habitaciones = [];
+        for( const key in restData){
+          if( restData.hasOwnProperty(key) ){
+            habitaciones.push(new Habitacion(
+              key,
+              restData[key].ubicacion,
+              restData[key].numeroHabitacion,
+              restData[key].tipo,
+              restData[key].precioXNoche,
+              restData[key].estado
+            ));
+          }
+        }
+        this.habitaciones = habitaciones;
+      }
+    );
     return [...this.habitaciones];
   }
   getLocalidades(){

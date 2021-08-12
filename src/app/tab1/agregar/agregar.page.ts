@@ -17,11 +17,7 @@ export class AgregarPage implements OnInit {
 
   ngOnInit() {
     this.form = new FormGroup({
-      id: new FormControl({
-        updateOn: 'blur',
-        validators: [Validators.required]
-      }),
-      numeroHabitacion: new FormControl({
+      numeroHabitacion: new FormControl(null, {
         updateOn: 'blur',
         validators: [Validators.required]
       }),
@@ -33,15 +29,7 @@ export class AgregarPage implements OnInit {
         updateOn: 'blur',
         validators: [Validators.required]
       }),
-      precioXNoche: new FormControl({
-        updateOn: 'blur',
-        validators: [Validators.required]
-      }),
-      estado: new FormControl({
-        updateOn: 'blur',
-        validators: [Validators.required]
-      }),
-      ocupacion: new FormControl({
+      precioXNoche: new FormControl(null, {
         updateOn: 'blur',
         validators: [Validators.required]
       })
@@ -50,18 +38,17 @@ export class AgregarPage implements OnInit {
   funcionAgregar(){
     console.log(this.form);
     if(!this.form.valid){
-      console.log('Nope');
       return;
     }
     this.hotelService.agregarHabitacion(
-      this.form.value.id,
+      '0',
       this.form.value.ubicacion,
       this.form.value.numeroHabitacion,
       this.form.value.tipo,
       this.form.value.precioXNoche,
-      this.form.value.estado,
-      this.form.value.ocupacion
+      'Activo'
     );
+    this.hotelService.getTodos();
     this.router.navigate(['tabs/tab1']);
   }
 }

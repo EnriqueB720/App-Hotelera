@@ -5,7 +5,6 @@ export interface Habitacion{
   tipo: string;
   precioXNoche: number;
   estado: string;
-  ocupacion: string;
 }
 export class Habitacion{
   constructor(
@@ -14,8 +13,7 @@ export class Habitacion{
     public numeroHabitacion: number,
     public tipo: string,
     public precioXNoche: number,
-    public estado: string,
-    public ocupacion: string
+    public estado: string
   ){}
 }
 export interface Localidad{

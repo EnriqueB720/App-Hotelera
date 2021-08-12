@@ -9,11 +9,24 @@ const routes: Routes = [
   },
   {
     path: 'lista',
-    loadChildren: () => import('./lista/lista.module').then( m => m.ListaPageModule)
+    children: [
+      {
+        path: '',
+        loadChildren: () => import('./lista/lista.module').then( m => m.ListaPageModule)
+      },
+      {
+        path: ':hash',
+        loadChildren: () => import('./agregar/agregar.module').then( m => m.AgregarPageModule)
+      }
+    ]
   },
   {
     path: 'agregar',
     loadChildren: () => import('./agregar/agregar.module').then( m => m.AgregarPageModule)
+  },
+  {
+    path: 'editar',
+    loadChildren: () => import('./editar/editar.module').then( m => m.EditarPageModule)
   }
 ];
 
