@@ -97,7 +97,7 @@ export class HotelService {
     this.habitaciones = this.getTodos();
     return [...this.habitaciones.filter(
       (habitaciones)=>{
-        return habitaciones.ubicacion === filtro;
+        return habitaciones.ubicacion === filtro || habitaciones.tipo === filtro;
     })];
   }
 }

@@ -37,7 +37,7 @@ export class ListaPage implements OnInit {
             const filtro = paramMap.get('Filtro');
             setTimeout(() => {
               this.habitaciones = this.hotelServicio.getHabitacionesFiltradas(filtro);
-            }, 100);
+            }, 50);
           }
         }
       )
