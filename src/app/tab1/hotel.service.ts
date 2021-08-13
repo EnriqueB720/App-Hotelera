@@ -93,4 +93,11 @@ export class HotelService {
   getTipos(){
     return [...this.tipos];
   }
+  getHabitacionesFiltradas(filtro){
+    this.habitaciones = this.getTodos();
+    return [...this.habitaciones.filter(
+      (habitaciones)=>{
+        return habitaciones.ubicacion === filtro;
+    })];
+  }
 }

@@ -27,6 +27,10 @@ const routes: Routes = [
   {
     path: 'editar',
     loadChildren: () => import('./editar/editar.module').then( m => m.EditarPageModule)
+  },
+  {
+    path: ':Filtro',
+    loadChildren: () => import('./lista/lista.module').then( m => m.ListaPageModule)
   }
 ];
 
