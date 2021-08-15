@@ -8,6 +8,8 @@
   color: gray;
 }
 #sign-up-button{
+  --ion-color-secondary: -webkit-linear-gradient(to right, #7f7fd5, #86a8e7, #91eae4);
+  --ion-color-secondary: linear-gradient(to right, #7f7fd5, #86a8e7, #91eae4);
   width: 320px;
   margin-top: 15px;
 }

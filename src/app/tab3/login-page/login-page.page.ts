@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {  FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AlertController, NavController } from '@ionic/angular';
-import { FirebaseServiceService } from 'src/app/tabs/firebase-service.service';
+import { FirebaseServiceService } from '../../tabs/firebase-service.service';
 import { User } from '../user.model';
 
 

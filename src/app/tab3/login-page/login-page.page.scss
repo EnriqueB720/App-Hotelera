@@ -8,6 +8,8 @@
   color: gray;
 }
 #sign-in-button{
+  --ion-color-primary: -webkit-linear-gradient(to right, #2193b0, #6dd5ed);
+  --ion-color-primary: linear-gradient(to right, #2193b0, #6dd5ed);
   width: 320px;
   margin-top: 15px;
 }

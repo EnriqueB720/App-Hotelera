@@ -20,6 +20,14 @@ ion-col{
   width: 100%;
   margin-bottom: 10px;
 }
+#sing-in-button{
+  --ion-color-primary: -webkit-linear-gradient(to right, #2193b0, #6dd5ed);
+  --ion-color-primary: linear-gradient(to right, #2193b0, #6dd5ed);
+}
+#sign-up-button{
+  --ion-color-secondary: -webkit-linear-gradient(to right, #7f7fd5, #86a8e7, #91eae4);
+  --ion-color-secondary: linear-gradient(to right, #7f7fd5, #86a8e7, #91eae4);
+}
 #footer-text{
   text-align:center;
    font-size:15px;

@@ -26,7 +26,8 @@ public userlogued: User[] = [];
                 restData[key].phoneNumber,
                 restData[key].email,
                 restData[key].password,
-                restData[key].rol
+                restData[key].rol,
+                restData[key].img
                 ));
             }
           }
@@ -54,7 +55,7 @@ LogOut(){
 //Registrar nuevo usuario
   addUser(fullName: string, phoneNumber: string, email: string, password: string){
       const userExist: User[] = this.getUsers();
-      const newUser = new User('',fullName, phoneNumber, email, password, 'user');
+      const newUser = new User('',fullName, phoneNumber, email, password, 'user','0');
 
       if(userExist.find(
         usuarios =>{
