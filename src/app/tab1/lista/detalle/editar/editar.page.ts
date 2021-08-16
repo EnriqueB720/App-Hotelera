@@ -28,26 +28,34 @@ export class EditarPage implements OnInit {
         }
         const habitacionId = paramMap.get('hash');
         this.habitacion = this.hotelService.getHabitacion(habitacionId);
-        this.form = new FormGroup({
-          numeroHabitacion: new FormControl(this.habitacion.numeroHabitacion, {
-            updateOn: 'blur',
-            validators: [Validators.required]
-          }),
-          ubicacion: new FormControl({
-            updateOn: 'blur',
-            validators: [Validators.required]
-          }),
-          tipo: new FormControl({
-            updateOn: 'blur',
-            validators: [Validators.required]
-          }),
-          precioXNoche: new FormControl(this.habitacion.precioXNoche, {
-            updateOn: 'blur',
-            validators: [Validators.required]
-          })
-        });
       }
     );
+    this.form = new FormGroup({
+      numeroHabitacion: new FormControl(this.habitacion.numeroHabitacion, {
+        updateOn: 'blur',
+        validators: [Validators.required]
+      }),
+      ubicacion: new FormControl(this.habitacion.ubicacion, {
+        updateOn: 'blur',
+        validators: [Validators.required]
+      }),
+      tipo: new FormControl(this.habitacion.tipo, {
+        updateOn: 'blur',
+        validators: [Validators.required]
+      }),
+      precioXNoche: new FormControl(this.habitacion.precioXNoche, {
+        updateOn: 'blur',
+        validators: [Validators.required]
+      }),
+      descripcion: new FormControl(this.habitacion.descripcion, {
+        updateOn: 'blur',
+        validators: [Validators.required]
+      }),
+      estado: new FormControl(this.habitacion.estado, {
+        updateOn: 'blur',
+        validators: [Validators.required]
+      })
+    });
   }
 
   ionViewWillEnter() {
@@ -58,25 +66,50 @@ export class EditarPage implements OnInit {
         }
         const habitacionId = paramMap.get('hash');
         this.habitacion = this.hotelService.getHabitacion(habitacionId);
-        this.form = new FormGroup({
-          numeroHabitacion: new FormControl(this.habitacion.numeroHabitacion, {
-            updateOn: 'blur',
-            validators: [Validators.required]
-          }),
-          ubicacion: new FormControl(this.habitacion.ubicacion,{
-            updateOn: 'blur',
-            validators: [Validators.required]
-          }),
-          tipo: new FormControl(this.habitacion.tipo,{
-            updateOn: 'blur',
-            validators: [Validators.required]
-          }),
-          precioXNoche: new FormControl(this.habitacion.precioXNoche, {
-            updateOn: 'blur',
-            validators: [Validators.required]
-          })
-        });
       }
     );
+    this.form = new FormGroup({
+      numeroHabitacion: new FormControl(this.habitacion.numeroHabitacion, {
+        updateOn: 'blur',
+        validators: [Validators.required]
+      }),
+      ubicacion: new FormControl(this.habitacion.ubicacion, {
+        updateOn: 'blur',
+        validators: [Validators.required]
+      }),
+      tipo: new FormControl(this.habitacion.tipo, {
+        updateOn: 'blur',
+        validators: [Validators.required]
+      }),
+      precioXNoche: new FormControl(this.habitacion.precioXNoche, {
+        updateOn: 'blur',
+        validators: [Validators.required]
+      }),
+      descripcion: new FormControl(this.habitacion.descripcion, {
+        updateOn: 'blur',
+        validators: [Validators.required]
+      }),
+      estado: new FormControl(this.habitacion.estado, {
+        updateOn: 'blur',
+        validators: [Validators.required]
+      })
+    });
+  }
+  funcionEditar(){
+    console.log(this.form);
+    if(!this.form.valid){
+      return;
+    }
+    console.log(this.habitacion.id);
+    this.hotelService.editarHabitacion(
+      this.habitacion.id,
+      this.form.value.ubicacion,
+      this.form.value.numeroHabitacion,
+      this.form.value.tipo,
+      this.form.value.precioXNoche,
+      this.form.value.descripcion,
+      this.form.value.estado
+    );
+    this.router.navigate(['tabs/tab1/lista']);
   }
 }

@@ -1,11 +1,11 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button color="primary" defaultHref="../"></ion-back-button>
+      <ion-back-button color="primary" defaultHref="tabs/tab1/lista/{{ habitacion.id }}"></ion-back-button>
     </ion-buttons>
-    <ion-title slot="start">Agregar Habitación</ion-title>
+    <ion-title slot="start">Editar Habitación</ion-title>
     <ion-buttons slot="end">
-      <ion-button>
+      <ion-button (click)="funcionEditar()">
         <ion-icon color="primary"name="pencil"></ion-icon>
       </ion-button>
     </ion-buttons>
@@ -53,6 +53,25 @@
           <ion-item>
             <ion-label position="floating">Precio</ion-label>
             <ion-input type="number" autocomplete autocorrect formControlName="precioXNoche" placeholder="Monto en dolares"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size-sm="6">
+          <ion-item>
+            <ion-label position="floating">Descripcion</ion-label>
+            <ion-textarea maxlength="120" autoGrow="true" formControlName="descripcion" placeholder="Descripcion de la habitacion"></ion-textarea>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size-sm="6" offset-sm="3">
+          <ion-item>
+            <ion-label position="floating">Estado Habitacion</ion-label>
+            <ion-select formControlName="estado" placeholder="Elija una opcion">
+              <ion-select-option value="Activo">Activo</ion-select-option>
+              <ion-select-option value="Inactivo">Inactivo</ion-select-option>
+            </ion-select>
           </ion-item>
         </ion-col>
       </ion-row>

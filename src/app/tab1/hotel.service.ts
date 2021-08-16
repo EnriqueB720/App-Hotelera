@@ -45,7 +45,7 @@ export class HotelService {
   ) {
     this.getTodos();
   }
-  agregarHabitacion(id: string, ubicacion: string, numeroHabitacion: number, tipo: string, precioXNoche: number,
+  agregarHabitacion(id: string, ubicacion: string, numeroHabitacion: number, tipo: string, precioXNoche: number, descripcion: string,
                     estado: string){
     const nuevaHabitacion = new Habitacion(
       id,
@@ -53,6 +53,7 @@ export class HotelService {
       numeroHabitacion,
       tipo,
       precioXNoche,
+      descripcion,
       estado
     );
     this.httpClient.post<{name: string}>('https://hotel-105b0-default-rtdb.firebaseio.com/habitaciones.json',
@@ -78,6 +79,7 @@ export class HotelService {
               restData[key].numeroHabitacion,
               restData[key].tipo,
               restData[key].precioXNoche,
+              restData[key].descripcion,
               restData[key].estado
             ));
           }
@@ -94,6 +96,9 @@ export class HotelService {
     return [...this.tipos];
   }
   getHabitacion(habitacionId: string){
+    for (let i = 0; i <= 1; i++){
+      this.habitaciones = this.getTodos();
+      }
     return {...this.habitaciones.find(
       habitacion => habitacionId === habitacion.id
     )};
@@ -102,5 +107,25 @@ export class HotelService {
     this.habitaciones = this.getTodos();
     return [...this.habitaciones.filter(
       (habitaciones)=>habitaciones.ubicacion === filtro || habitaciones.tipo === filtro)];
+  }
+  editarHabitacion(id: string, ubicacion: string, numeroHabitacion: number, tipo: string, precioXNoche: number, descripcion: string,
+    estado: string) {
+    const nuevaHabitacion = new Habitacion(
+      id,
+      ubicacion,
+      numeroHabitacion,
+      tipo,
+      precioXNoche,
+      descripcion,
+      estado
+    );
+    this.httpClient.put<{name: string}>(`https://hotel-105b0-default-rtdb.firebaseio.com/habitaciones/${id}.json`, {
+      ...nuevaHabitacion,
+      id: null
+    }).subscribe(
+      (restData) =>{
+        console.log(restData);
+      }
+    );
   }
 }

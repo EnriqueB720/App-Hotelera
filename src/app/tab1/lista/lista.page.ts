@@ -32,7 +32,9 @@ export class ListaPage implements OnInit {
       this.activatedRoutes.paramMap.subscribe(
         paramMap => {
           if(!paramMap.has('Filtro')){
-            this.habitaciones = this.hotelServicio.getTodos();
+            setTimeout(() =>
+            {this.habitaciones = this.hotelServicio.getTodos();
+            },50);
           }else{
             const filtro = paramMap.get('Filtro');
             setTimeout(() => {
@@ -48,7 +50,9 @@ export class ListaPage implements OnInit {
       this.activatedRoutes.paramMap.subscribe(
         paramMap => {
           if(!paramMap.has('Filtro')){
-            this.habitaciones = this.hotelServicio.getTodos();
+            setTimeout(() =>
+            {this.habitaciones = this.hotelServicio.getTodos();
+            },50);
           }else{
             const filtro = paramMap.get('Filtro');
             this.habitaciones = this.hotelServicio.getHabitacionesFiltradas(filtro);

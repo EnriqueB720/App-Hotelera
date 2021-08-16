@@ -32,6 +32,10 @@ export class AgregarPage implements OnInit {
       precioXNoche: new FormControl(null, {
         updateOn: 'blur',
         validators: [Validators.required]
+      }),
+      descripcion: new FormControl(null, {
+        updateOn: 'blur',
+        validators: [Validators.required]
       })
     });
   }
@@ -46,6 +50,7 @@ export class AgregarPage implements OnInit {
       this.form.value.numeroHabitacion,
       this.form.value.tipo,
       this.form.value.precioXNoche,
+      this.form.value.descripcion,
       'Activo'
     );
     this.hotelService.getTodos();

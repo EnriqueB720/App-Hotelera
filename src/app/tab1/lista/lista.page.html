@@ -12,14 +12,14 @@
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
   <ion-list *ngIf="habitaciones[0] !== undefined">
-    <ion-item *ngFor="let habitacion of habitaciones" [routerLink] = "['./', habitacion.id]">
-      <ion-avatar >
-        <ion-img *ngIf="habitacion.tipo === 'Suite'" src="../assets/images/Suite.jpg"></ion-img>
-        <ion-img *ngIf="habitacion.tipo === 'Mediana'" src="../assets/images/Mediana.jpg"></ion-img>
-        <ion-img *ngIf="habitacion.tipo === 'Pequeña'" src="../assets/images/Pequeña.jpg"></ion-img>
-      </ion-avatar>
-      <ion-label>Numero: {{ habitacion.numeroHabitacion }} - {{ habitacion.tipo }} -  {{ habitacion.ubicacion }}</ion-label>
-      <ion-icon color="primary" name="chevron-forward-outline"></ion-icon>
-    </ion-item>
+    <ion-card *ngFor="let habitacion of habitaciones" [routerLink] = "['../lista', habitacion.id]">
+      <ion-img src="../assets/images/Suite.jpg"></ion-img>
+      <ion-card-header>
+        <ion-card-title>Habitacion: {{ habitacion.numeroHabitacion }} - {{ habitacion.tipo }} -  {{ habitacion.ubicacion }}</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        {{ habitacion.descripcion }}
+      </ion-card-content>
+    </ion-card>
   </ion-list>
 </ion-content>

@@ -4,6 +4,7 @@ export interface Habitacion{
   numeroHabitacion: number;
   tipo: string;
   precioXNoche: number;
+  descripcion: string;
   estado: string;
 }
 export class Habitacion{
@@ -13,6 +14,7 @@ export class Habitacion{
     public numeroHabitacion: number,
     public tipo: string,
     public precioXNoche: number,
+    public descripcion: string,
     public estado: string
   ){}
 }
