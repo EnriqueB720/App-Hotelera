@@ -12,6 +12,7 @@ export class Tab3Page{
   username: string = " ";
   rol: string = " ";
   phoneNumber: string = "";
+  img: string = "";
   user: User[];
   constructor(public firebaseService: FirebaseServiceService,
               private router: Router) {}
@@ -30,6 +31,7 @@ export class Tab3Page{
       this.rol = this.user[0].rol;
       this.phoneNumber = this.user[0].phoneNumber.toString().substring(0,4) + "-" + this.user[0].phoneNumber.toString().substring(4,8);
       this.username = this.user[0].fullName;
+      this.img = this.user[0].img;
     }
   }
   logOut(){
@@ -38,6 +40,7 @@ export class Tab3Page{
       this.rol = " ";
       this.username = " ";
       this.phoneNumber = " ";
+      this.img = "";
       this.router.navigate(['/tabs/tab1']);
     }else{
       return;

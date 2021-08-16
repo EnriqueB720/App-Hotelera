@@ -15,7 +15,8 @@
         </ion-col>
         <ion-col size="2">
           <ion-avatar>
-            <ion-img src="assets/images/default-user.png" id="user-logo"></ion-img>
+            <ion-img src="assets/images/default-user.png" id="user-logo" *ngIf= " img === ''"></ion-img>
+            <ion-img *ngIf= " img !== ''" src="assets/images/user_logo{{img}}.PNG"  id="user-logo" ></ion-img>
           </ion-avatar>
         </ion-col>
       </ion-row>

@@ -57,7 +57,8 @@ LogOut(){
 }
 //Registrar nuevo usuario
   addUser(fullName: string, phoneNumber: string, email: string, password: string){
-      const newUser = new User('',fullName, phoneNumber, email, password, 'user','0');
+     const imgID = Math.floor(Math.random() * 5) + 1;
+      const newUser = new User('',fullName, phoneNumber, email, password, 'user',imgID.toString());
 
       if(this.users.find(
         usuarios =>{
