@@ -101,9 +101,6 @@ export class HotelService {
   getHabitacionesFiltradas(filtro){
     this.habitaciones = this.getTodos();
     return [...this.habitaciones.filter(
-      // eslint-disable-next-line arrow-body-style
-      (habitaciones)=>{
-        return habitaciones.ubicacion === filtro || habitaciones.tipo === filtro;
-    })];
+      (habitaciones)=>habitaciones.ubicacion === filtro || habitaciones.tipo === filtro)];
   }
 }
