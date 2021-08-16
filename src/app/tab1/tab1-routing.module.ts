@@ -16,7 +16,16 @@ const routes: Routes = [
       },
       {
         path: ':hash',
-        loadChildren: () => import('./agregar/agregar.module').then( m => m.AgregarPageModule)
+        children: [
+          {
+            path: '',
+            loadChildren: () => import('./lista/detalle/detalle.module').then( m => m.DetallePageModule)
+          },
+          {
+            path: 'editar',
+            loadChildren: () => import('./lista/detalle/editar/editar.module').then( m => m.EditarPageModule)
+          }
+        ]
       }
     ]
   },
@@ -24,10 +33,6 @@ const routes: Routes = [
     path: 'agregar',
     loadChildren: () => import('./agregar/agregar.module').then( m => m.AgregarPageModule)
   },
-  {
-    path: 'editar',
-    loadChildren: () => import('./editar/editar.module').then( m => m.EditarPageModule)
-  }
 ];
 
 @NgModule({

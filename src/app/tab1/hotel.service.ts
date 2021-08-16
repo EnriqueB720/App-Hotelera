@@ -93,4 +93,9 @@ export class HotelService {
   getTipos(){
     return [...this.tipos];
   }
+  getHabitacion(habitacionId: string){
+    return {...this.habitaciones.find(
+      habitacion => habitacionId === habitacion.id
+    )};
+  }
 }

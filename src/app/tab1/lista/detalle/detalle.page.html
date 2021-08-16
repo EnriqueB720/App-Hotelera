@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button color="primary" defaultHref="tabs/tab1/lista"></ion-back-button>
+    </ion-buttons>
+    <ion-buttons id="editar" slot="end">
+      <ion-button fill="outline" size="small" color="primary" [routerLink]="['./editar']">Editar</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div>
+    <ion-slides pager="true">
+      <ion-slide>
+        <ion-img src="assets/images/Suite.jpg"></ion-img>
+      </ion-slide>
+      <ion-slide>
+        <ion-img src="assets/images/Mediana.jpg"></ion-img>
+      </ion-slide>
+      <ion-slide>
+        <ion-img src="assets/images/Pequeña.jpg"></ion-img>
+      </ion-slide>
+    </ion-slides>
+  </div>
+  <ion-item>
+  <ion-label class="title">Numero de habitacion:</ion-label>
+  <p>{{ habitacion.numeroHabitacion }}</p>
+</ion-item>
+<ion-item>
+  <ion-label class="title">Ubicación:</ion-label>
+  <p>{{ habitacion.ubicacion }}</p>
+</ion-item>
+<ion-item>
+  <ion-label class="title">Tipo de Habitacion:</ion-label>
+  <p>{{ habitacion.tipo }}</p>
+</ion-item>
+<ion-item>
+  <ion-label class="title">Precio por noche:</ion-label>
+  <p>${{ habitacion.precioXNoche }}</p>
+</ion-item>
+<ion-button class="reservar" expand="full">Reservar</ion-button>
+</ion-content>
