@@ -34,11 +34,14 @@ public userlogued: User[] = [];
           this.users = user;
         }
     );
-    return [...this.users]
+    return [...this.users];
   }
 
 //Buscar usuario logueado
 logIn(email: string, password: string){
+  for(let i = 0; i <= 1; i++){
+    this.getUsers();// Esto es para buscar los datos de firebase hasta el mas reciente
+  }
   this.userlogued.pop();
   this.userlogued.push(this.users.find(
     (usuario)=>{
@@ -54,10 +57,9 @@ LogOut(){
 }
 //Registrar nuevo usuario
   addUser(fullName: string, phoneNumber: string, email: string, password: string){
-      const userExist: User[] = this.getUsers();
       const newUser = new User('',fullName, phoneNumber, email, password, 'user','0');
 
-      if(userExist.find(
+      if(this.users.find(
         usuarios =>{
           return usuarios.email === email;
         }

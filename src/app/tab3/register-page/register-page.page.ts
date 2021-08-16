@@ -16,7 +16,7 @@ export class RegisterPagePage implements OnInit {
   errorControl: Number= 0;
   constructor(private router: Router,
               private firebase: FirebaseServiceService,
-              private alertCtrl: AlertController) { }
+              private alertCtrl: AlertController) {}
 
   ngOnInit() {
     this.signUpForm = new FormGroup({
@@ -41,8 +41,13 @@ export class RegisterPagePage implements OnInit {
         validators: [Validators.required]
       })
     });
+    this.firebase.getUsers();
   }
-
+ionViewWillEnter(){
+  setTimeout(()=>{
+    this.firebase.getUsers();
+  },100);
+}
   newUser(){
     if(!this.signUpForm.valid) return;
     if(this.signUpForm.value.confirmedPassword !== this.signUpForm.value.password){
