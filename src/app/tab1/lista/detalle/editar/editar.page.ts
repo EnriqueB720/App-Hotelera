@@ -108,7 +108,8 @@ export class EditarPage implements OnInit {
       this.form.value.tipo,
       this.form.value.precioXNoche,
       this.form.value.descripcion,
-      this.form.value.estado
+      this.form.value.estado,
+      ''
     );
     this.router.navigate(['tabs/tab1/lista']);
   }
