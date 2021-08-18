@@ -1,0 +1,49 @@
+#user-logo{
+  height: 50px;
+  width: 50px;
+  margin-top: 6px;
+}
+#profile-title{
+  margin-top: 10px;
+  font-size: 24px;
+  color: black;
+}
+ion-header,ion-toolbar{
+  height: 80px;
+}
+ion-col{
+  font-family: Arial, "Times New Roman";
+  color: gray;
+  font-size: 18px;
+}
+#sing-in-button, #sign-up-button{
+  width: 100%;
+  margin-bottom: 10px;
+}
+#sing-in-button{
+  --ion-color-primary: -webkit-linear-gradient(to right, #2193b0, #6dd5ed);
+  --ion-color-primary: linear-gradient(to right, #2193b0, #6dd5ed);
+}
+#sign-up-button{
+  --ion-color-secondary: -webkit-linear-gradient(to right, #7f7fd5, #86a8e7, #91eae4);
+  --ion-color-secondary: linear-gradient(to right, #7f7fd5, #86a8e7, #91eae4);
+}
+#footer-text{
+  text-align:center;
+   font-size:15px;
+   color: gray;
+   margin-top: 50px;
+}
+
+#profile-title-user{
+  font-size: 17px;
+  color: black;
+  margin-top: 20px;
+  text-align: center;
+}
+@media screen and (max-width: 320px) {
+  #profile-title{
+    font-size: 18px;
+  }
+}
+
