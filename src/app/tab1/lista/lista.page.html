@@ -13,7 +13,7 @@
   </ion-refresher>
   <ion-list *ngIf="habitaciones[0] !== undefined">
     <ion-card *ngFor="let habitacion of habitaciones" [routerLink] = "['../lista', habitacion.id]">
-      <ion-img src="../assets/images/Suite.jpg"></ion-img>
+      <ion-img [src]="habitacion.imagen"></ion-img>
       <ion-card-header>
         <ion-card-title>Habitacion: {{ habitacion.numeroHabitacion }} - {{ habitacion.tipo }} -  {{ habitacion.ubicacion }}</ion-card-title>
       </ion-card-header>

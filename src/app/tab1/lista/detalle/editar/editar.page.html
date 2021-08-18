@@ -67,6 +67,20 @@
       <ion-row>
         <ion-col size-sm="6" offset-sm="3">
           <ion-item>
+            <ion-label position="floating">Cantidad maxima de personas</ion-label>
+            <ion-select formControlName="cantMaxPersonas" placeholder="Elija una opcion">
+              <ion-select-option value="1">1 Persona</ion-select-option>
+              <ion-select-option value="2">2 Personas</ion-select-option>
+              <ion-select-option value="3">3 Personas</ion-select-option>
+              <ion-select-option value="4">4 Personas</ion-select-option>
+              <ion-select-option value="5">5 Personas</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size-sm="6" offset-sm="3">
+          <ion-item>
             <ion-label position="floating">Estado Habitacion</ion-label>
             <ion-select formControlName="estado" placeholder="Elija una opcion">
               <ion-select-option value="Activo">Activo</ion-select-option>
@@ -75,11 +89,37 @@
           </ion-item>
         </ion-col>
       </ion-row>
-      <ion-row *ngIf="form.status !== 'VALID' && form.get('')">
-        <ion-col size-sm="6" offset-sm="3">
-          <p>Todos los campos son requeridos</p>
-        </ion-col>
-      </ion-row>
     </ion-grid>
   </form>
+  <ion-grid>
+    <ion-row>
+      <ion-col size-sm="6">
+        <ion-item>
+          <ion-label>Foto</ion-label>
+          <ion-buttons slot="end">
+            <ion-button>
+              <label for="archivo">
+                <ion-icon slot="icon-only" name="image-outline"></ion-icon>
+              </label>
+              <input (change)="cargarImagen($event)" id="archivo" style="display: none;" type="file" accept="image/*">
+            </ion-button>
+          </ion-buttons>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size-sm="3">
+        <ion-card *ngIf="nuevaImagen !== ''">
+          <ion-card-content>
+            <img [src]="nuevaImagen">
+          </ion-card-content>
+        </ion-card>
+        <ion-card *ngIf="nuevaImagen === ''">
+          <ion-card-content>
+            <img [src]="this.habitacion.imagen">
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

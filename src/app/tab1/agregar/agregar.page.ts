@@ -13,10 +13,11 @@ export class AgregarPage implements OnInit {
   form: FormGroup;
   nuevaImagen = '';
   nuevoArchivo = '';
+  validez = '';
   imagen = 'assets/images/Mediana.jpg';
   constructor(
     private hotelService: HotelService,
-    private router: Router
+    private router: Router,
   ) { }
 
   ngOnInit() {
@@ -40,17 +41,29 @@ export class AgregarPage implements OnInit {
       descripcion: new FormControl(null, {
         updateOn: 'blur',
         validators: [Validators.required]
-      })
+      }),
+      cantMaxPersonas: new FormControl({
+        updateOn: 'blur',
+        validators: [Validators.required]
+      }),
     });
   }
   async funcionAgregar(){
+    this.hotelService.getTodos();
     if(!this.form.valid){
+      this.hotelService.alertaInvalido();
       return;
     }
-    const path = 'Imagenes';
-    const nombre = this.form.value.numeroHabitacion;;
-    const res = await this.hotelService.cargarNuevaImagen(this.nuevoArchivo, path, nombre);
-    this.imagen = res;
+    if(!this.hotelService.validarExistencia(this.form.value.numeroHabitacion, this.form.value.ubicacion)){
+      this.hotelService.alertaExistente();
+      return;
+    }
+    if(this.nuevaImagen !== ''){
+      const path = 'Imagenes';
+      const nombre = this.form.value.numeroHabitacion + this.form.value.ubicacion;
+      const res = await this.hotelService.cargarNuevaImagen(this.nuevoArchivo, path, nombre);
+      this.imagen = res;
+    }
     this.hotelService.agregarHabitacion(
       '0',
       this.form.value.ubicacion,
@@ -59,9 +72,9 @@ export class AgregarPage implements OnInit {
       this.form.value.precioXNoche,
       this.form.value.descripcion,
       'Activo',
-      this.imagen
+      this.imagen,
+      this.form.value.cantMaxPersonas
     );
-    this.hotelService.getTodos();
     this.router.navigate(['tabs/tab1']);
   }
   cargarImagen(event: any){
@@ -75,3 +88,4 @@ export class AgregarPage implements OnInit {
     }
   }
 }
+

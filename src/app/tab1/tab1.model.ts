@@ -7,6 +7,7 @@ export interface Habitacion{
   descripcion: string;
   estado: string;
   imagen: string;
+  cantMaxPersonas: number;
 }
 export class Habitacion{
   constructor(
@@ -18,6 +19,7 @@ export class Habitacion{
     public descripcion: string,
     public estado: string,
     public imagen: string,
+    public cantMaxPersonas: number
   ){}
 }
 export interface Localidad{

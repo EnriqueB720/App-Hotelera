@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { Habitacion, Localidad, Tipo } from './tab1.model';
 import { finalize } from 'rxjs/operators';
+import { AlertController } from '@ionic/angular';
 
 @Injectable({
   providedIn: 'root'
@@ -44,12 +45,13 @@ export class HotelService {
 
   constructor(
     public storage: AngularFireStorage,
-    private httpClient: HttpClient
+    private httpClient: HttpClient,
+    private alertCtrl: AlertController
   ) {
     this.getTodos();
   }
   agregarHabitacion(id: string, ubicacion: string, numeroHabitacion: number, tipo: string, precioXNoche: number, descripcion: string,
-                    estado: string, imagen: string){
+                    estado: string, imagen: string, cantMaxPersonas: number){
     const nuevaHabitacion = new Habitacion(
       id,
       ubicacion,
@@ -58,7 +60,8 @@ export class HotelService {
       precioXNoche,
       descripcion,
       estado,
-      imagen
+      imagen,
+      cantMaxPersonas
     );
     this.httpClient.post<{name: string}>('https://hotel-105b0-default-rtdb.firebaseio.com/habitaciones.json',
     {
@@ -85,7 +88,8 @@ export class HotelService {
               restData[key].precioXNoche,
               restData[key].descripcion,
               restData[key].estado,
-              restData[key].imagen
+              restData[key].imagen,
+              restData[key].cantMaxPersonas
             ));
           }
         }
@@ -101,9 +105,6 @@ export class HotelService {
     return [...this.tipos];
   }
   getHabitacion(habitacionId: string){
-    for (let i = 0; i <= 1; i++){
-      this.habitaciones = this.getTodos();
-      }
     return {...this.habitaciones.find(
       habitacion => habitacionId === habitacion.id
     )};
@@ -114,7 +115,7 @@ export class HotelService {
       (habitaciones)=>habitaciones.ubicacion === filtro || habitaciones.tipo === filtro)];
   }
   editarHabitacion(id: string, ubicacion: string, numeroHabitacion: number, tipo: string, precioXNoche: number, descripcion: string,
-    estado: string, imagen: string) {
+    estado: string, imagen: string, cantMaxPersonas: number) {
     const nuevaHabitacion = new Habitacion(
       id,
       ubicacion,
@@ -123,7 +124,8 @@ export class HotelService {
       precioXNoche,
       descripcion,
       estado,
-      imagen
+      imagen,
+      cantMaxPersonas
     );
     this.httpClient.put<{name: string}>(`https://hotel-105b0-default-rtdb.firebaseio.com/habitaciones/${id}.json`, {
       ...nuevaHabitacion,
@@ -150,5 +152,46 @@ export class HotelService {
      )
     .subscribe();
     });
+  }
+  alertaInvalido(){
+    this.alertCtrl.create({
+      header: 'Error',
+      message: 'Todos los campos del fomulario deben ser validos',
+      buttons: ['Aceptar']
+    }).then(
+      alertElement =>{
+        alertElement.present();
+      }
+    );
+  }
+  alertaExistente(){
+    this.alertCtrl.create({
+      header: 'Error',
+      message: 'Habitacion ya existe',
+      buttons: ['Aceptar']
+    }).then(
+      alertElement =>{
+        alertElement.present();
+      }
+    );
+  }
+  validarExistencia(numeroHabitacion: number, ubicacion: string){
+    for(let i =0; i < 50; i++){
+      this.getTodos();
+    }
+    if(this.habitaciones === undefined){
+      return true;
+    }
+    const DB = this.habitaciones.find(
+      x => numeroHabitacion === x.numeroHabitacion && ubicacion === x.ubicacion
+    );
+    console.log(DB);
+    console.log(numeroHabitacion);
+    console.log(ubicacion);
+    if(DB !== undefined){
+      return false;
+    }else{
+      return true;
+    }
   }
 }

@@ -13,6 +13,9 @@ import { Habitacion } from 'src/app/tab1/tab1.model';
 export class EditarPage implements OnInit {
   habitacion: Habitacion;
   form: FormGroup;
+  imagen = 'assets/images/Pequeña.jpg';
+  nuevaImagen = '';
+  nuevoArchivo = '';
   constructor(
     private activatedRoute: ActivatedRoute,
     private hotelService: HotelService,
@@ -54,6 +57,10 @@ export class EditarPage implements OnInit {
       estado: new FormControl(this.habitacion.estado, {
         updateOn: 'blur',
         validators: [Validators.required]
+      }),
+      cantMaxPersonas: new FormControl(this.habitacion.cantMaxPersonas, {
+        updateOn: 'blur',
+        validators: [Validators.required]
       })
     });
   }
@@ -92,15 +99,35 @@ export class EditarPage implements OnInit {
       estado: new FormControl(this.habitacion.estado, {
         updateOn: 'blur',
         validators: [Validators.required]
+      }),
+      cantMaxPersonas: new FormControl(this.habitacion.cantMaxPersonas, {
+        updateOn: 'blur',
+        validators: [Validators.required]
       })
     });
   }
-  funcionEditar(){
+  async funcionEditar(){
     console.log(this.form);
     if(!this.form.valid){
       return;
     }
-    console.log(this.habitacion.id);
+    console.log(this.form.value.numeroHabitacion);
+    console.log(this.form.value.ubicacion);
+    console.log(this.habitacion.numeroHabitacion);
+    console.log(this.habitacion.ubicacion);
+    if(this.habitacion.numeroHabitacion !== this.form.value.numeroHabitacion || this.habitacion.ubicacion !== this.form.value.ubicacion){
+      if(!this.hotelService.validarExistencia(this.form.value.numeroHabitacion, this.form.value.ubicacion)){
+        this.hotelService.alertaExistente();
+        return;
+      }
+    }
+    this.imagen = this.habitacion.imagen;
+    if(this.nuevaImagen !== ''){
+      const path = 'Imagenes';
+      const nombre = this.form.value.numeroHabitacion + this.form.value.ubicacion;
+      const res = await this.hotelService.cargarNuevaImagen(this.nuevoArchivo, path, nombre);
+      this.imagen = res;
+    }
     this.hotelService.editarHabitacion(
       this.habitacion.id,
       this.form.value.ubicacion,
@@ -109,8 +136,19 @@ export class EditarPage implements OnInit {
       this.form.value.precioXNoche,
       this.form.value.descripcion,
       this.form.value.estado,
-      ''
+      this.imagen,
+      this.form.value.cantMaxPersonas
     );
-    this.router.navigate(['tabs/tab1/lista']);
+    this.router.navigate(['tabs/tab1/']);
+  }
+  cargarImagen(event: any){
+    if (event.target.files && event.target.files[0]){
+      this.nuevoArchivo = event.target.files[0];
+      const lector = new FileReader();
+      lector.onload = ((imagen) => {
+        this.nuevaImagen = imagen.target.result as string;
+      });
+      lector.readAsDataURL(event.target.files[0]);
+    }
   }
 }
