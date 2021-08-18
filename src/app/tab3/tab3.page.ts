@@ -9,10 +9,10 @@ import { User} from './user.model';
   styleUrls: ['tab3.page.scss']
 })
 export class Tab3Page{
-  username: string = " ";
-  rol: string = " ";
-  phoneNumber: string = "";
-  img: string = "";
+  username= ' ';
+  rol= ' ';
+  phoneNumber= '';
+  img='0';
   user: User[];
   constructor(public firebaseService: FirebaseServiceService,
               private router: Router) {}
@@ -22,14 +22,14 @@ export class Tab3Page{
   }
   ionViewDidEnter(){
     if(this.username.length < 8 && this.rol === 'user'){
-      document.getElementById("profile-title-user").setAttribute("style" , "font-size: 23px; ");
+      document.getElementById('profile-title-user').setAttribute('style' , 'font-size: 23px; ');
     }
   }
   ionViewWillEnter(){
     if(this.firebaseService.userlogued[0] !== undefined){
       this.user =  this.firebaseService.userlogued;
       this.rol = this.user[0].rol;
-      this.phoneNumber = this.user[0].phoneNumber.toString().substring(0,4) + "-" + this.user[0].phoneNumber.toString().substring(4,8);
+      this.phoneNumber = this.user[0].phoneNumber.toString().substring(0,4) + '-' + this.user[0].phoneNumber.toString().substring(4,8);
       this.username = this.user[0].fullName;
       this.img = this.user[0].img;
     }
@@ -37,10 +37,10 @@ export class Tab3Page{
   logOut(){
     if(this.firebaseService.LogOut()){
       this.user.pop();
-      this.rol = " ";
-      this.username = " ";
-      this.phoneNumber = " ";
-      this.img = "";
+      this.rol = ' ';
+      this.username = ' ';
+      this.phoneNumber = ' ';
+      this.img = '';
       this.router.navigate(['/tabs/tab1']);
     }else{
       return;
