@@ -130,11 +130,7 @@ export class HotelService {
     this.httpClient.put<{name: string}>(`https://hotel-105b0-default-rtdb.firebaseio.com/habitaciones/${id}.json`, {
       ...nuevaHabitacion,
       id: null
-    }).subscribe(
-      (restData) =>{
-        console.log(restData);
-      }
-    );
+    }).subscribe();
   }
   cargarNuevaImagen(file: any, path: string, nombre: string): Promise<string>{
     return new Promise( resolve => {
@@ -185,9 +181,6 @@ export class HotelService {
     const DB = this.habitaciones.find(
       x => numeroHabitacion === x.numeroHabitacion && ubicacion === x.ubicacion
     );
-    console.log(DB);
-    console.log(numeroHabitacion);
-    console.log(ubicacion);
     if(DB !== undefined){
       return false;
     }else{

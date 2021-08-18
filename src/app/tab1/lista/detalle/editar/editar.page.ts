@@ -107,14 +107,9 @@ export class EditarPage implements OnInit {
     });
   }
   async funcionEditar(){
-    console.log(this.form);
     if(!this.form.valid){
       return;
     }
-    console.log(this.form.value.numeroHabitacion);
-    console.log(this.form.value.ubicacion);
-    console.log(this.habitacion.numeroHabitacion);
-    console.log(this.habitacion.ubicacion);
     if(this.habitacion.numeroHabitacion !== this.form.value.numeroHabitacion || this.habitacion.ubicacion !== this.form.value.ubicacion){
       if(!this.hotelService.validarExistencia(this.form.value.numeroHabitacion, this.form.value.ubicacion)){
         this.hotelService.alertaExistente();

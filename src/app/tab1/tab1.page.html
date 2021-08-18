@@ -2,7 +2,7 @@
   <ion-toolbar>
     <ion-title>Inicio</ion-title>
     <ion-buttons slot="end">
-      <ion-button fill="outline" size="small" color="primary" [routerLink]="['./agregar']">Agregar</ion-button>
+      <ion-button *ngIf= " rol === 'admin' " fill="outline" size="small" color="primary" [routerLink]="['./agregar']">Agregar</ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>

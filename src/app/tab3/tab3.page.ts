@@ -9,10 +9,10 @@ import { User} from './user.model';
   styleUrls: ['tab3.page.scss']
 })
 export class Tab3Page{
-  username: string = " ";
-  rol: string = " ";
-  phoneNumber: string = "";
-  img: string = "";
+  username = " ";
+  rol = " ";
+  phoneNumber = "";
+  img = "";
   user: User[];
   constructor(public firebaseService: FirebaseServiceService,
               private router: Router) {}
@@ -35,15 +35,18 @@ export class Tab3Page{
     }
   }
   logOut(){
-    if(this.firebaseService.LogOut()){
-      this.user.pop();
-      this.rol = " ";
-      this.username = " ";
-      this.phoneNumber = " ";
-      this.img = "";
-      this.router.navigate(['/tabs/tab1']);
-    }else{
-      return;
-    }
+    setTimeout(() =>{
+      if(this.firebaseService.LogOut()){
+        this.user.pop();
+        this.rol = " ";
+        this.username = " ";
+        this.phoneNumber = " ";
+        this.img = "";
+        this.router.navigate(['/tabs/tab1']);
+      }else{
+        return;
+      }
+    },500);
+
   }
 }
