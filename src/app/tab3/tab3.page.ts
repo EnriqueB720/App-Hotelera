@@ -9,17 +9,14 @@ import { User} from './user.model';
   styleUrls: ['tab3.page.scss']
 })
 export class Tab3Page{
-  username= ' ';
-  rol= ' ';
-  phoneNumber= '';
-  img='0';
+  username = ' ';
+  rol = ' ';
+  phoneNumber = '';
+  img = '';
   user: User[];
   constructor(public firebaseService: FirebaseServiceService,
               private router: Router) {}
 
-  ngOnInit() {
-
-  }
   ionViewDidEnter(){
     if(this.username.length < 8 && this.rol === 'user'){
       document.getElementById('profile-title-user').setAttribute('style' , 'font-size: 23px; ');
@@ -35,15 +32,18 @@ export class Tab3Page{
     }
   }
   logOut(){
-    if(this.firebaseService.LogOut()){
-      this.user.pop();
-      this.rol = ' ';
-      this.username = ' ';
-      this.phoneNumber = ' ';
-      this.img = '';
-      this.router.navigate(['/tabs/tab1']);
-    }else{
-      return;
-    }
+    setTimeout(() =>{
+      if(this.firebaseService.LogOut()){
+        this.user.pop();
+        this.rol = ' ';
+        this.username = ' ';
+        this.phoneNumber = ' ';
+        this.img = '';
+        this.router.navigate(['/tabs/tab1']);
+      }else{
+        return;
+      }
+    },500);
+
   }
 }

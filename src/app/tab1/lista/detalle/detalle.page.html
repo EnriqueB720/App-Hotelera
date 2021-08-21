@@ -3,9 +3,10 @@
     <ion-buttons slot="start">
       <ion-back-button color="primary" defaultHref="tabs/tab1/lista"></ion-back-button>
     </ion-buttons>
-    <ion-title>Estado: {{ habitacion.estado }}</ion-title>
+    <ion-title *ngIf= " rol === 'admin' ">Estado: {{ habitacion.estado }}</ion-title>
+    <ion-title *ngIf= " rol !== 'admin' ">Habitacion</ion-title>
     <ion-buttons id="editar" slot="end">
-      <ion-button fill="outline" size="small" color="primary" [routerLink]="['./editar']">Editar</ion-button>
+      <ion-button *ngIf= " rol === 'admin'" fill="outline" size="small" color="primary" [routerLink]="['./editar']">Editar</ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>

@@ -65,56 +65,10 @@ export class EditarPage implements OnInit {
     });
   }
 
-  ionViewWillEnter() {
-    this.activatedRoute.paramMap.subscribe(
-      paramMap => {
-        if(!paramMap.has('hash')){
-          return;
-        }
-        const habitacionId = paramMap.get('hash');
-        this.habitacion = this.hotelService.getHabitacion(habitacionId);
-      }
-    );
-    this.form = new FormGroup({
-      numeroHabitacion: new FormControl(this.habitacion.numeroHabitacion, {
-        updateOn: 'blur',
-        validators: [Validators.required]
-      }),
-      ubicacion: new FormControl(this.habitacion.ubicacion, {
-        updateOn: 'blur',
-        validators: [Validators.required]
-      }),
-      tipo: new FormControl(this.habitacion.tipo, {
-        updateOn: 'blur',
-        validators: [Validators.required]
-      }),
-      precioXNoche: new FormControl(this.habitacion.precioXNoche, {
-        updateOn: 'blur',
-        validators: [Validators.required]
-      }),
-      descripcion: new FormControl(this.habitacion.descripcion, {
-        updateOn: 'blur',
-        validators: [Validators.required]
-      }),
-      estado: new FormControl(this.habitacion.estado, {
-        updateOn: 'blur',
-        validators: [Validators.required]
-      }),
-      cantMaxPersonas: new FormControl(this.habitacion.cantMaxPersonas, {
-        updateOn: 'blur',
-        validators: [Validators.required]
-      })
-    });
-  }
   async funcionEditar(){
-    console.log(this.form);
     if(!this.form.valid){
       return;
     }
-    console.log(this.form.value.numeroHabitacion);
-    console.log(this.form.value.ubicacion);
-    console.log(this.habitacion.numeroHabitacion);
-    console.log(this.habitacion.ubicacion);
     if(this.habitacion.numeroHabitacion !== this.form.value.numeroHabitacion || this.habitacion.ubicacion !== this.form.value.ubicacion){
       if(!this.hotelService.validarExistencia(this.form.value.numeroHabitacion, this.form.value.ubicacion)){
         this.hotelService.alertaExistente();
