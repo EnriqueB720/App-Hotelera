@@ -18,7 +18,7 @@
 </ion-header>
 
 <ion-content>
-<form [formGroup]= "signInForm">
+<form [formGroup]= "form">
   <ion-grid>
     <ion-row>
       <ion-col>
@@ -36,16 +36,16 @@
           <ion-label position="floating">
             Contraseña
           </ion-label>
-          <ion-input type="password" autocomplete autocorrect placeholder="Contraseña" formControlName="password"></ion-input>
+          <ion-input type="password" autocomplete autocorrect placeholder="Contraseña" formControlName="contrasena"></ion-input>
         </ion-item>
       </ion-col>
     </ion-row>
     <ion-row>
       <ion-col style="text-align:center;">
-        <ion-button id="sign-in-button" color = "primary" (click)= "logueIn()" >Inicia Sesión</ion-button>
+        <ion-button id="boton-login" color = "primary" (click)= "logueIn()" >Inicia Sesión</ion-button>
       </ion-col>
     </ion-row>
-    <p id="footer-text"> Todos los derechos reservados.</p>
+    <p id="texto-pie"> Todos los derechos reservados.</p>
   </ion-grid>
 </form>
 </ion-content>

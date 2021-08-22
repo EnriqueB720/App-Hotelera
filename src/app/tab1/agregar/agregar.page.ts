@@ -2,7 +2,6 @@ import { Component, OnInit, ɵLifecycleHooksFeature } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { HotelService } from '../hotel.service';
-import { Habitacion } from '../tab1.model';
 
 @Component({
   selector: 'app-agregar',
@@ -48,16 +47,20 @@ export class AgregarPage implements OnInit {
       }),
     });
   }
+  //Agregar una nueva habitacion
   async funcionAgregar(){
     this.hotelService.getTodos();
+    //Verificar si el formulario es valido
     if(!this.form.valid){
       this.hotelService.alertaInvalido();
       return;
     }
+    //Verificar si la habitacion ya existe en la base de datos
     if(!this.hotelService.validarExistencia(this.form.value.numeroHabitacion, this.form.value.ubicacion)){
       this.hotelService.alertaExistente();
       return;
     }
+    //Agregar Imagen
     if(this.nuevaImagen !== ''){
       const path = 'Imagenes';
       const nombre = this.form.value.numeroHabitacion + this.form.value.ubicacion;
@@ -77,6 +80,7 @@ export class AgregarPage implements OnInit {
     );
     this.router.navigate(['tabs/tab1']);
   }
+  //Cargar imagen en el formulario
   cargarImagen(event: any){
     if (event.target.files && event.target.files[0]){
       this.nuevoArchivo = event.target.files[0];

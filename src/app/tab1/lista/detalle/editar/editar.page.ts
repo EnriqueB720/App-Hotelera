@@ -64,21 +64,26 @@ export class EditarPage implements OnInit {
       })
     });
   }
-
+  //Editar una habitacion
   async funcionEditar(){
+    //Validar si el formulario es valido
     if(!this.form.valid){
+      this.hotelService.alertaInvalido();
       return;
     }
+    //Validar si los campos nuevos ingresados no chocan con registros de la BD
     if(this.habitacion.numeroHabitacion !== this.form.value.numeroHabitacion || this.habitacion.ubicacion !== this.form.value.ubicacion){
       if(!this.hotelService.validarExistencia(this.form.value.numeroHabitacion, this.form.value.ubicacion)){
         this.hotelService.alertaExistente();
         return;
       }
     }
+    //Agreagar o modificar una imagen
     this.imagen = this.habitacion.imagen;
     if(this.nuevaImagen !== ''){
       const path = 'Imagenes';
       const nombre = this.form.value.numeroHabitacion + this.form.value.ubicacion;
+      //await espera a que la funcion termine
       const res = await this.hotelService.cargarNuevaImagen(this.nuevoArchivo, path, nombre);
       this.imagen = res;
     }
@@ -95,6 +100,7 @@ export class EditarPage implements OnInit {
     );
     this.router.navigate(['tabs/tab1/']);
   }
+  //Cargar imagen en la pagina
   cargarImagen(event: any){
     if (event.target.files && event.target.files[0]){
       this.nuevoArchivo = event.target.files[0];

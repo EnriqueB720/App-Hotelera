@@ -12,19 +12,19 @@ import { AlertController} from '@ionic/angular';
   styleUrls: ['./register-page.page.scss'],
 })
 export class RegisterPagePage implements OnInit {
-  signUpForm: FormGroup;
-  errorControl: Number= 0;
+  form: FormGroup;
+  errorControl= 0;
   constructor(private router: Router,
               private firebase: FirebaseServiceService,
               private alertCtrl: AlertController) {}
 
   ngOnInit() {
-    this.signUpForm = new FormGroup({
-      fullName: new FormControl(null,{
+    this.form = new FormGroup({
+      nombreCompleto: new FormControl(null,{
         updateOn: 'blur',
         validators: [Validators.required]
       }),
-      phoneNumber: new FormControl(null,{
+      numeroTel: new FormControl(null,{
         updateOn: 'blur',
         validators: [Validators.required,Validators.maxLength(8)]
       }),
@@ -32,25 +32,25 @@ export class RegisterPagePage implements OnInit {
         updateOn: 'blur',
         validators: [Validators.required, Validators.email]
       }),
-      password: new FormControl(null,{
+      contrasena: new FormControl(null,{
         updateOn: 'blur',
         validators: [Validators.required, Validators.minLength(8)]
       }),
-      confirmedPassword: new FormControl(null,{
+      contrasenaConfirmada: new FormControl(null,{
         updateOn: 'blur',
         validators: [Validators.required]
       })
     });
-    this.firebase.getUsers();
+    this.firebase.getUsuarios();
   }
 ionViewWillEnter(){
   setTimeout(()=>{
-    this.firebase.getUsers();
+    this.firebase.getUsuarios();
   },100);
 }
-  newUser(){
-    if(!this.signUpForm.valid) return;
-    if(this.signUpForm.value.confirmedPassword !== this.signUpForm.value.password){
+  nuevoUsuario(){
+    if(!this.form.valid) {return;}
+    if(this.form.value.contrasenaConfirmada !== this.form.value.password){
         this.alertCtrl.create({
            header: 'Alerta',
            message: 'Confirme su contraseña correctamente',
@@ -64,11 +64,11 @@ ionViewWillEnter(){
            }
          );
      }else{
-       if(this.firebase.addUser(
-          this.signUpForm.value.fullName,
-          this.signUpForm.value.phoneNumber,
-          this.signUpForm.value.email,
-          this.signUpForm.value.password
+       if(this.firebase.agregarUsuario(
+          this.form.value.nombreCompleto,
+          this.form.value.numeroTel,
+          this.form.value.email,
+          this.form.value.contrasena
         ) === false){
           this.errorControl = 1;
         }else{

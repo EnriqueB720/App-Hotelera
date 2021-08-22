@@ -3,20 +3,20 @@
     <ion-grid>
       <ion-row>
         <ion-col size="10">
-          <ion-title id="profile-title" *ngIf = "rol === ' '">
+          <ion-title id="titulo-perfil" *ngIf = "rol === ' '">
             Tu Perfil
           </ion-title>
-          <ion-title id="profile-title" *ngIf= "rol === 'admin'">
+          <ion-title id="titulo-perfil" *ngIf= "rol === 'admin'">
             Administrador
           </ion-title>
-          <ion-title  id="profile-title-user"  *ngIf= "rol === 'user'">
-            {{username}}
+          <ion-title  id="titulo-perfil-usuario"  *ngIf= "rol === 'user'">
+            {{nombreUsuario}}
           </ion-title>
         </ion-col>
         <ion-col size="2">
           <ion-avatar>
-            <ion-img src="assets/images/default-user.png" id="user-logo" *ngIf= " rol === 'admin' || rol === ' '"></ion-img>
-            <ion-img *ngIf= " rol === 'user'" src="assets/images/user_logo{{img}}.PNG"  id="user-logo" ></ion-img>
+            <ion-img src="assets/images/default-user.png" id="logo-usuario" *ngIf= " rol === 'admin' || rol === ' '"></ion-img>
+            <ion-img *ngIf= " rol === 'user'" src="assets/images/user_logo{{img}}.PNG"  id="logo-usuario" ></ion-img>
           </ion-avatar>
         </ion-col>
       </ion-row>
@@ -34,9 +34,9 @@
     </ion-row>
     <ion-row>
       <ion-col>
-        <ion-button id="sing-in-button" [routerLink] = "['./login-page']">Iniciar Sesión <ion-icon name="log-in-outline"></ion-icon></ion-button>
+        <ion-button id="boton-login" [routerLink] = "['./login-page']">Iniciar Sesión <ion-icon name="log-in-outline"></ion-icon></ion-button>
         ¿No tienes cuenta?
-        <ion-button id= "sign-up-button" color= "secondary" [routerLink] = "['./register-page']">Regístrarse</ion-button>
+        <ion-button id= "boton-registrar" color= "secondary" [routerLink] = "['./register-page']">Regístrarse</ion-button>
       </ion-col>
     </ion-row>
   </ion-grid>
@@ -54,17 +54,17 @@
         <ion-title style="color:black">Informacion de la cuenta.</ion-title>
         <ion-card>
           <ion-card-header>
-             <ion-card-title>Correo electronico: <u>{{user[0].email}}</u></ion-card-title>
+             <ion-card-title>Correo electronico: <u>{{usuario[0].email}}</u></ion-card-title>
           </ion-card-header>
           <ion-card-content>
             <ion-grid>
               <ion-row>
                 <ion-col>Numero:</ion-col>
-                <ion-col>{{phoneNumber}}</ion-col>
+                <ion-col>{{numeroTel}}</ion-col>
               </ion-row>
               <ion-row style="max-height: 90px; overflow: scroll;">
                 <ion-col size="6">Nombre Completo:</ion-col>
-                <ion-col size="6">{{username}}</ion-col>
+                <ion-col size="6">{{nombreUsuario}}</ion-col>
               </ion-row>
               <!--Si tiene algun rol-->
               <ion-row *ngIf= "rol !== 'user' ">
@@ -83,5 +83,5 @@
       </ion-col>
     </ion-row>
   </ion-grid>
-  <p id="footer-text"> Todos los derechos reservados.</p>
+  <p id="texto-pie-pag"> Todos los derechos reservados.</p>
 </ion-content>

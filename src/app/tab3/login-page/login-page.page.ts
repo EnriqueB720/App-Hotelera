@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {  FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AlertController, NavController } from '@ionic/angular';
+import { AlertController } from '@ionic/angular';
 import { FirebaseServiceService } from '../../tabs/firebase-service.service';
-import { User } from '../user.model';
+import { Usuario } from '../user.model';
 
 
 @Component({
@@ -12,20 +12,19 @@ import { User } from '../user.model';
   styleUrls: ['./login-page.page.scss'],
 })
 export class LoginPagePage implements OnInit {
-  signInForm: FormGroup;
-  user: User[] = [];
+  form: FormGroup;
+  usuario: Usuario[] = [];
   constructor(private router: Router,
     private firebase: FirebaseServiceService,
-    private alertCtrl: AlertController,
-    private navCRTL: NavController) { }
+    private alertCtrl: AlertController) { }
 
   ngOnInit() {
-    this.signInForm = new FormGroup({
+    this.form = new FormGroup({
       email: new FormControl(null,{
         updateOn: 'blur',
         validators: [Validators.required, Validators.email]
       }),
-      password: new FormControl(null,{
+      contrasena: new FormControl(null,{
         updateOn: 'blur',
         validators: [Validators.required]
       })
@@ -33,9 +32,9 @@ export class LoginPagePage implements OnInit {
   }
 
   logueIn(){
-    if(!this.signInForm.valid) return;
-    this.user[0] = this.firebase.logIn(this.signInForm.value.email,this.signInForm.value.password)[0];
-    if(this.user[0] === undefined ){
+    if(!this.form.valid) {return;}
+    this.usuario[0] = this.firebase.logIn(this.form.value.email,this.form.value.contrasena)[0];
+    if(this.usuario[0] === undefined ){
         this.alertCtrl.create({
           header: 'Alerta',
           message: 'Correo electronico o Contraseña incorrectos',

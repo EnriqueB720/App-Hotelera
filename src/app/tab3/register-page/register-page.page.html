@@ -10,7 +10,7 @@
           </ion-buttons>
         </ion-col>
         <ion-col size="11">
-          <ion-title style="text-align: center; transform: translateY(22%) translateX(-3%);" >Registrate</ion-title>
+          <ion-title>Registrate</ion-title>
         </ion-col>
       </ion-row>
     </ion-grid>
@@ -18,7 +18,7 @@
 </ion-header>
 
 <ion-content>
-<form [formGroup] = "signUpForm">
+<form [formGroup] = "form">
  <ion-grid>
    <ion-row>
      <ion-col>
@@ -26,7 +26,7 @@
         <ion-label position="floating">
           Nombre Completo
         </ion-label>
-        <ion-input type="text" autocomplete autocorrect placeholder="Nombre, Apellidos..." formControlName="fullName"></ion-input>
+        <ion-input type="text" autocomplete autocorrect placeholder="Nombre, Apellidos..." formControlName="nombreCompleto"></ion-input>
       </ion-item>
      </ion-col>
    </ion-row>
@@ -36,7 +36,7 @@
        <ion-label position="floating">
          Telefono
        </ion-label>
-       <ion-input type="number" autocomplete autocorrect placeholder="00000000" formControlName="phoneNumber"></ion-input>
+       <ion-input type="number" autocomplete autocorrect placeholder="00000000" formControlName="numeroTel"></ion-input>
       </ion-item>
     </ion-col>
   </ion-row>
@@ -48,7 +48,7 @@
        </ion-label>
        <ion-input type="email" autocomplete autocorrect placeholder="ejemplo@ejemplo.com" formControlName="email"></ion-input>
       </ion-item>
-      <p *ngIf= "errorControl === 1" id="alert-text">Este correo electronico ya esta en uso.</p>
+      <p *ngIf= "errorControl === 1" id="alerta-texto">Este correo electronico ya esta en uso.</p>
     </ion-col>
   </ion-row>
   <ion-row>
@@ -57,7 +57,7 @@
        <ion-label position="floating">
          Constraseña
        </ion-label>
-       <ion-input type="password" autocomplete autocorrect placeholder="Mínimo 8 Caracteres" formControlName="password"></ion-input>
+       <ion-input type="password" autocomplete autocorrect placeholder="Mínimo 8 Caracteres" formControlName="contrasena"></ion-input>
       </ion-item>
     </ion-col>
   </ion-row>
@@ -67,16 +67,16 @@
        <ion-label position="floating">
          Confirmar Constraseña
        </ion-label>
-       <ion-input type="password" autocomplete autocorrect placeholder="Confirmar Contraseña" formControlName="confirmedPassword"></ion-input>
+       <ion-input type="password" autocomplete autocorrect placeholder="Confirmar Contraseña" formControlName="contrsenaConfirmada"></ion-input>
       </ion-item>
     </ion-col>
   </ion-row>
   <ion-row>
     <ion-col style="text-align:center;">
-      <ion-button id="sign-up-button" color="secondary" (click)= "newUser()" >Registrarse!</ion-button>
+      <ion-button id="boton-registrar" color="secondary" (click)= "nuevoUsuario()" >Registrarse!</ion-button>
     </ion-col>
   </ion-row>
-  <p id="footer-text"> Todos los derechos reservados.</p>
+  <p id="texto-pie"> Todos los derechos reservados.</p>
  </ion-grid>
 </form>
 </ion-content>

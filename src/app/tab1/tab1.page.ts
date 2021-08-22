@@ -1,6 +1,6 @@
 import { ThrowStmt } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
-import { User } from '../tab3/user.model';
+import { Usuario } from '../tab3/user.model';
 import { FirebaseServiceService } from '../tabs/firebase-service.service';
 import { HotelService } from './hotel.service';
 import { Localidad, Tipo } from './tab1.model';
@@ -12,8 +12,8 @@ import { Localidad, Tipo } from './tab1.model';
 export class Tab1Page implements OnInit{
   public localidades: Localidad[];
   public tipos: Tipo[];
-  public user: User[];
-  rol = "";
+  public user: Usuario[];
+  rol = '';
   constructor(private hotelService: HotelService,
               public firebaseService: FirebaseServiceService) {}
   ngOnInit(){
@@ -21,7 +21,8 @@ export class Tab1Page implements OnInit{
     this.tipos = this.hotelService.getTipos();
   }
   ionViewWillEnter(){
-    this.rol = "";
+    this.rol = '';
+    //Verificar si el usuario se encuentra logueado
     if(this.firebaseService.userlogued[0] !== undefined){
       this.user =  this.firebaseService.userlogued;
       this.rol = this.user[0].rol;

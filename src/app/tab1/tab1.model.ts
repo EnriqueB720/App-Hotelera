@@ -1,14 +1,3 @@
-export interface Habitacion{
-  id: string;
-  ubicacion: string;
-  numeroHabitacion: number;
-  tipo: string;
-  precioXNoche: number;
-  descripcion: string;
-  estado: string;
-  imagen: string;
-  cantMaxPersonas: number;
-}
 export class Habitacion{
   constructor(
     public id: string,

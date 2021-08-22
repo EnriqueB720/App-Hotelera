@@ -10,6 +10,7 @@ import { AlertController } from '@ionic/angular';
 })
 export class HotelService {
   private habitaciones: Habitacion[] = [];
+  //Crear localidades disponibles
   private localidades: Localidad[] = [
     {
       nombre: 'Guanacaste',
@@ -28,6 +29,7 @@ export class HotelService {
       imagen: 'assets/images/San Jose.jpg'
     },
   ];
+  //Crear tipos de habitacion disponible
   private tipos: Tipo[] = [
     {
       tipo: 'Suite',
@@ -63,17 +65,20 @@ export class HotelService {
       imagen,
       cantMaxPersonas
     );
+    //Se guarda la habitacion en firebase por metodo post
     this.httpClient.post<{name: string}>('https://hotel-105b0-default-rtdb.firebaseio.com/habitaciones.json',
     {
       ...nuevaHabitacion,
       id: null
     }).subscribe(
       (restData) => {
+        //Se guarda el hash de firebase en el espacio id del objeto
         nuevaHabitacion.id = restData.name;
       }
     );
   }
   getTodos(){
+    //Se llaman a todas las habitaciones por metodo get
     this.httpClient.get<{ [key: string]: Habitacion } >('https://hotel-105b0-default-rtdb.firebaseio.com/habitaciones.json')
     .subscribe(
       restData => {
@@ -93,27 +98,33 @@ export class HotelService {
             ));
           }
         }
+        //Se guardan las habitaciones de firebase en un arreglo de habitaciones
         this.habitaciones = habitaciones;
       }
     );
     return [...this.habitaciones];
   }
+  //Llamar localidades disponibles
   getLocalidades(){
     return [...this.localidades];
   }
+  //Llamar tipos disponibles
   getTipos(){
     return [...this.tipos];
   }
+  //Llamar una habitacion especifica
   getHabitacion(habitacionId: string){
     return {...this.habitaciones.find(
       habitacion => habitacionId === habitacion.id
     )};
   }
+  //filtro de habitaciones por tipo o bien por ubicacion
   getHabitacionesFiltradas(filtro){
     this.habitaciones = this.getTodos();
     return [...this.habitaciones.filter(
       (habitaciones)=>habitaciones.ubicacion === filtro || habitaciones.tipo === filtro)];
   }
+  //Editar habitacion especifica
   editarHabitacion(id: string, ubicacion: string, numeroHabitacion: number, tipo: string, precioXNoche: number, descripcion: string,
     estado: string, imagen: string, cantMaxPersonas: number) {
     const nuevaHabitacion = new Habitacion(
@@ -132,14 +143,18 @@ export class HotelService {
       id: null
     }).subscribe();
   }
+  //Cargar una imagen en el form
   cargarNuevaImagen(file: any, path: string, nombre: string): Promise<string>{
+    //Promesa para que cargue la imagen
     return new Promise( resolve => {
+      //Se guarda el path del archivo
       const filePath = path + '/' + nombre;
       const ref = this.storage.ref(filePath);
       const task = ref.put(file);
       task.snapshotChanges().pipe(
         finalize(() => {
           ref.getDownloadURL().subscribe( res => {
+            //Se almacena la url de la imagen en firebase
             const downloadURL = res;
             resolve(downloadURL);
             return;
@@ -149,6 +164,7 @@ export class HotelService {
     .subscribe();
     });
   }
+  //Alerta si los espacios del formulario no son validos
   alertaInvalido(){
     this.alertCtrl.create({
       header: 'Error',
@@ -160,6 +176,7 @@ export class HotelService {
       }
     );
   }
+  //Alerta si la habitacion existe
   alertaExistente(){
     this.alertCtrl.create({
       header: 'Error',
@@ -171,6 +188,7 @@ export class HotelService {
       }
     );
   }
+  //Validar si una habitacion ya existe
   validarExistencia(numeroHabitacion: number, ubicacion: string){
     for(let i =0; i < 50; i++){
       this.getTodos();

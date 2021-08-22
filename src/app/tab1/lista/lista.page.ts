@@ -3,7 +3,7 @@ import { HotelService } from '../hotel.service';
 import { Habitacion } from '../tab1.model';
 import { ActivatedRoute } from '@angular/router';
 import { FirebaseServiceService } from 'src/app/tabs/firebase-service.service';
-import { User } from 'src/app/tab3/user.model';
+import { Usuario } from 'src/app/tab3/user.model';
 
 @Component({
   selector: 'app-lista',
@@ -13,7 +13,7 @@ import { User } from 'src/app/tab3/user.model';
 export class ListaPage{
   habitaciones: Habitacion[] = [];
   rol = '';
-  user: User[];
+  usuario: Usuario[];
   constructor(
     private hotelServicio: HotelService,
     private activatedRoutes: ActivatedRoute,
@@ -40,10 +40,11 @@ export class ListaPage{
 
     this.rol = '';
     if(this.firebaseService.userlogued[0] !== undefined){
-      this.user =  this.firebaseService.userlogued;
-      this.rol = this.user[0].rol;
+      this.usuario =  this.firebaseService.userlogued;
+      this.rol = this.usuario[0].rol;
     }
   }
+  //Refresher (Ionic Component) por si la habitacion nueva o una modificacion no se visualiza
   doRefresh(event){
     setTimeout(() => {
       this.activatedRoutes.paramMap.subscribe(

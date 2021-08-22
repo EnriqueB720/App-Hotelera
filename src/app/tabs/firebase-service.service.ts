@@ -1,78 +1,73 @@
 import { Injectable } from '@angular/core';
-import { User } from '../tab3/user.model';
-import { HttpClient } from '@angular/common/http'
-
+import { Usuario } from '../tab3/user.model';
+import { HttpClient } from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
 export class FirebaseServiceService {
-private users: User[] = [];
-public userlogued: User[] = [];
+public userlogued: Usuario[] = [];
+private usuarios: Usuario[] = [];
   constructor(private httpClient: HttpClient) {
-    this.users = this.getUsers();
+    this.usuarios = this.getUsuarios();
    }
 
 //Tomar todos los usuarios
-  getUsers(){
-    this.httpClient.get<{ [key: string]: User }>("https://hotel-be340-default-rtdb.firebaseio.com/usuario.json")
+  getUsuarios(){
+    this.httpClient.get<{ [key: string]: Usuario }>('https://hotel-be340-default-rtdb.firebaseio.com/usuario.json')
     .subscribe(
         restData => {
-          const user = [];
+          const usuario = [];
           for (const key in restData){
             if(restData.hasOwnProperty(key)){
-              user.push(new User(
+              usuario.push(new Usuario(
                 key,
-                restData[key].fullName,
-                restData[key].phoneNumber,
+                restData[key].nombreCompleto,
+                restData[key].numeroTel,
                 restData[key].email,
-                restData[key].password,
+                restData[key].contrasena,
                 restData[key].rol,
                 restData[key].img
                 ));
             }
           }
-          this.users = user;
+          this.usuarios = usuario;
         }
     );
-    return [...this.users];
+    return [...this.usuarios];
   }
 
 //Buscar usuario logueado
 logIn(email: string, password: string){
   for(let i = 0; i <= 1; i++){
-    this.getUsers();// Esto es para buscar los datos de firebase hasta el mas reciente
+    this.getUsuarios();// Esto es para buscar los datos de firebase hasta el mas reciente
   }
   this.userlogued.pop();
-  this.userlogued.push(this.users.find(
-    (usuario)=>{
-   return usuario.email === email && usuario.password === password;
-  }
+  this.userlogued.push(this.usuarios.find(
+    (usuario)=>usuario.email === email && usuario.contrasena === password
   ));
   return [...this.userlogued];
 
 }
-LogOut(){
+logOut(){
   this.userlogued.pop();
   return true;
 }
 //Registrar nuevo usuario
-  addUser(fullName: string, phoneNumber: string, email: string, password: string){
+  agregarUsuario(nombreCompleto: string, numeroTel: string, email: string, contrsena: string){
      const imgID = Math.floor(Math.random() * 5) + 1;
-      const newUser = new User('',fullName, phoneNumber, email, password, 'user',imgID.toString());
+      const nuevoUsuario = new Usuario('',nombreCompleto, numeroTel, email, contrsena, 'user',imgID.toString());
 
-      if(this.users.find(
-        usuarios =>{
-          return usuarios.email === email;
-        }
+      if(this.usuarios.find(
+        usuarios =>usuarios.email === email
       ) === undefined){
-      this.httpClient.post<{name: string}>("https://hotel-be340-default-rtdb.firebaseio.com/usuario.json", {
-       ...newUser
+      this.httpClient.post<{name: string}>('https://hotel-be340-default-rtdb.firebaseio.com/usuario.json', {
+       ...nuevoUsuario
        }).subscribe(
        (restData) =>{
-         newUser.id = restData.name;
+         nuevoUsuario.id = restData.name;
        }
         );
-        this.users.push(newUser);
+        this.usuarios.push(nuevoUsuario);
         return true;
       }else{
         return false;
