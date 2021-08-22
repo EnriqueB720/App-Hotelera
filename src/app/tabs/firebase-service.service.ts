@@ -43,7 +43,10 @@ logIn(email: string, password: string){
   }
   this.userlogued.pop();
   this.userlogued.push(this.usuarios.find(
-    (usuario)=>usuario.email === email && usuario.contrasena === password
+    (usuario)=>
+    {
+       return usuario.email === email && usuario.contrasena === password;
+    }
   ));
   return [...this.userlogued];
 
