@@ -50,7 +50,7 @@ ionViewWillEnter(){
 }
   nuevoUsuario(){
     if(!this.form.valid) {return;}
-    if(this.form.value.contrasenaConfirmada !== this.form.value.password){
+    if(this.form.value.contrasenaConfirmada !== this.form.value.contrasena){
         this.alertCtrl.create({
            header: 'Alerta',
            message: 'Confirme su contraseña correctamente',

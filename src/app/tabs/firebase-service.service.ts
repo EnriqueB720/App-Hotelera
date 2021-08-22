@@ -49,8 +49,8 @@ logIn(email: string, password: string){
     }
   ));
   return [...this.userlogued];
-
 }
+
 logOut(){
   this.userlogued.pop();
   return true;
