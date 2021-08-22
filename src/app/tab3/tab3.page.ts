@@ -19,7 +19,7 @@ export class Tab3Page{
 
   ionViewDidEnter(){
     if(this.nombreUsuario.length < 8 && this.rol === 'user'){
-      document.getElementById('profile-title-user').setAttribute('style' , 'font-size: 23px; ');
+      document.getElementById('titulo-perfil-usuario').setAttribute('style' , 'font-size: 23px; ');
     }
   }
   ionViewWillEnter(){
