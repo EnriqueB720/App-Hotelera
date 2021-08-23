@@ -43,7 +43,12 @@ export class ListaPage{
       this.usuario =  this.firebaseService.userlogued;
       this.rol = this.usuario[0].rol;
     }
+    this.ionViewDidEnter();
   }
+  ionViewDidEnter(){
+    this.habitaciones = this.hotelServicio.getTodos();
+  }
+
   //Refresher (Ionic Component) por si la habitacion nueva o una modificacion no se visualiza
   doRefresh(event){
     setTimeout(() => {

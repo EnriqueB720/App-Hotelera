@@ -13,7 +13,7 @@ private usuarios: Usuario[] = [];
 
 //Tomar todos los usuarios
   getUsuarios(){
-    this.httpClient.get<{ [key: string]: Usuario }>('https://hotel-be340-default-rtdb.firebaseio.com/usuario.json')
+    this.httpClient.get<{ [key: string]: Usuario }>('https://hotel-105b0-default-rtdb.firebaseio.com/usuario.json')
     .subscribe(
         restData => {
           const usuario = [];
@@ -63,7 +63,7 @@ logOut(){
       if(this.usuarios.find(
         usuarios =>usuarios.email === email
       ) === undefined){
-      this.httpClient.post<{name: string}>('https://hotel-be340-default-rtdb.firebaseio.com/usuario.json', {
+      this.httpClient.post<{name: string}>('https://hotel-105b0-default-rtdb.firebaseio.com/usuario.json', {
        ...nuevoUsuario
        }).subscribe(
        (restData) =>{

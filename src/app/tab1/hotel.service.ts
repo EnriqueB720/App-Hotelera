@@ -21,11 +21,11 @@ export class HotelService {
       imagen: 'assets/images/Puntarenas.jpg'
     },
     {
-      nombre: 'Limon',
+      nombre: 'Limón',
       imagen: 'assets/images/Limon.jpg'
     },
     {
-      nombre: 'San Jose',
+      nombre: 'San José',
       imagen: 'assets/images/San Jose.jpg'
     },
   ];

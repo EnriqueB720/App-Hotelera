@@ -4,7 +4,7 @@
       <ion-back-button color="primary" defaultHref="tabs/tab1/lista"></ion-back-button>
     </ion-buttons>
     <ion-title *ngIf= " rol === 'admin' ">Estado: {{ habitacion.estado }}</ion-title>
-    <ion-title *ngIf= " rol !== 'admin' ">Habitacion</ion-title>
+    <ion-title *ngIf= " rol !== 'admin' ">Habitación</ion-title>
     <ion-buttons id="editar" slot="end">
       <ion-button *ngIf= " rol === 'admin'" fill="outline" size="small" color="primary" [routerLink]="['./editar']">Editar</ion-button>
     </ion-buttons>
@@ -14,7 +14,7 @@
 <ion-content>
   <ion-img [src]="habitacion.imagen"></ion-img>
   <ion-item>
-    <ion-label class="title">Numero de habitacion:</ion-label>
+    <ion-label class="title">Numero de habitación:</ion-label>
     <p>{{ habitacion.numeroHabitacion }}</p>
   </ion-item>
   <ion-item>
@@ -22,12 +22,12 @@
     <p>{{ habitacion.ubicacion }}</p>
   </ion-item>
   <ion-item>
-    <ion-label class="title">Tipo de Habitacion:</ion-label>
+    <ion-label class="title">Tipo de Habitación:</ion-label>
     <p>{{ habitacion.tipo }}</p>
   </ion-item>
   <ion-item>
     <ion-label class="title">Precio por noche:</ion-label>
-    <p>${{ habitacion.precioXNoche }}</p>
+    <p>${{ habitacion.precioXNoche }} x noche</p>
   </ion-item>
   <ion-button class="reservar" expand="full">Reservar</ion-button>
 </ion-content>
