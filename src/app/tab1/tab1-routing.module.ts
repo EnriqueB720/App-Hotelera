@@ -36,7 +36,11 @@ const routes: Routes = [
   {
     path: ':Filtro',
     loadChildren: () => import('./lista/lista.module').then( m => m.ListaPageModule)
+  },  {
+    path: 'reservacion',
+    loadChildren: () => import('./reservacion/reservacion.module').then( m => m.ReservacionPageModule)
   }
+
 ];
 
 @NgModule({
