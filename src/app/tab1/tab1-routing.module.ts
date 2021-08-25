@@ -24,6 +24,10 @@ const routes: Routes = [
           {
             path: 'editar',
             loadChildren: () => import('./lista/detalle/editar/editar.module').then( m => m.EditarPageModule)
+          },
+          {
+            path: 'reservacion',
+            loadChildren: () => import('./reservacion/reservacion.module').then( m => m.ReservacionPageModule)
           }
         ]
       },
@@ -36,11 +40,7 @@ const routes: Routes = [
   {
     path: ':Filtro',
     loadChildren: () => import('./lista/lista.module').then( m => m.ListaPageModule)
-  },  {
-    path: 'reservacion',
-    loadChildren: () => import('./reservacion/reservacion.module').then( m => m.ReservacionPageModule)
   }
-
 ];
 
 @NgModule({
