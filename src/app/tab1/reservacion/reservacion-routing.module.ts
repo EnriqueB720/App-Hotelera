@@ -7,6 +7,10 @@ const routes: Routes = [
   {
     path: '',
     component: ReservacionPage
+  },
+  {
+    path: 'confirmada',
+    loadChildren: () => import('./confirmada/confirmada.module').then( m => m.ConfirmadaPageModule)
   }
 ];
 

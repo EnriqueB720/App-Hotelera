@@ -27,7 +27,16 @@ const routes: Routes = [
           },
           {
             path: 'reservacion',
-            loadChildren: () => import('./reservacion/reservacion.module').then( m => m.ReservacionPageModule)
+            children:[
+              {
+                path: '',
+                loadChildren: () => import('./reservacion/reservacion.module').then( m => m.ReservacionPageModule)
+              },
+              {
+                path: 'confirmacion',
+                loadChildren: () => import('./reservacion/confirmada/confirmada.module').then( m => m.ConfirmadaPageModule)
+              }
+            ]
           }
         ]
       },
