@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Usuario } from '../tab3/user.model';
 import { HttpClient } from '@angular/common/http';
+import { reservaciones } from '../tab2/reservaciones.model';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -26,7 +28,8 @@ private usuarios: Usuario[] = [];
                 restData[key].email,
                 restData[key].contrasena,
                 restData[key].rol,
-                restData[key].img
+                restData[key].img,
+                restData[key].reservaciones
                 ));
             }
           }
@@ -58,7 +61,8 @@ logOut(){
 //Registrar nuevo usuario
   agregarUsuario(nombreCompleto: string, numeroTel: string, email: string, contrsena: string){
      const imgID = Math.floor(Math.random() * 5) + 1;
-      const nuevoUsuario = new Usuario('',nombreCompleto, numeroTel, email, contrsena, 'user',imgID.toString());
+     const reservacionVacia: reservaciones[] = [];
+      const nuevoUsuario = new Usuario('',nombreCompleto, numeroTel, email, contrsena, 'user',imgID.toString(), reservacionVacia);
 
       if(this.usuarios.find(
         usuarios =>usuarios.email === email

@@ -4,12 +4,14 @@ import { AngularFireStorage } from '@angular/fire/storage';
 import { Habitacion, Localidad, Tipo } from './tab1.model';
 import { finalize } from 'rxjs/operators';
 import { AlertController } from '@ionic/angular';
+import { reservaciones } from '../tab2/reservaciones.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HotelService {
   private habitaciones: Habitacion[] = [];
+  private reservacion: reservaciones[]  = [];
   //Crear localidades disponibles
   private localidades: Localidad[] = [
     {
@@ -205,4 +207,44 @@ export class HotelService {
       return true;
     }
   }
+
+  getReservaciones(idHab: string){
+      this.httpClient.get<{ [key: string]: reservaciones } >('https://hotel-105b0-default-rtdb.firebaseio.com/reservaciones.json')
+      .subscribe(
+        restData => {
+          const reservacion = [];
+          for( const key in restData){
+            if( restData.hasOwnProperty(key) ){
+              reservacion.push(new reservaciones(
+                key,
+                restData[key].habitacion,
+                restData[key].fechaEntrada,
+                restData[key].fechaSalida
+              ));
+            }
+          }
+          this.reservacion = reservacion;
+        }
+      );
+      return [...this.reservacion.filter((reservaciones)=>{
+        return reservaciones.habitacion === idHab
+     })];
+}
+
+agregarReservacion(idHab: string, fechaEntrada: Date, fechaSalida: Date){
+  const reservacion = new reservaciones(
+    '0',
+    idHab,
+    fechaEntrada,
+    fechaSalida
+  );
+  this.httpClient.post<{name: string}>('https://hotel-105b0-default-rtdb.firebaseio.com/reservaciones.json',
+  {
+    ...reservacion
+  }).subscribe(
+    (restData) => {
+      reservacion.id = restData.name;
+    }
+  );
+}
 }
