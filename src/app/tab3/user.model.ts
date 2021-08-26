@@ -1,4 +1,3 @@
-import { reservaciones } from "../tab2/reservaciones.model";
 
 export class Usuario{
   constructor(
@@ -8,8 +7,7 @@ export class Usuario{
     public email: string,
     public contrasena: string,
     public rol: string,
-    public img: string,
-    public reservaciones: reservaciones[]
+    public img: string
   ){}
 }
 

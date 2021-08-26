@@ -93,7 +93,7 @@ export class ReservacionPage implements OnInit {
   this.reservaciones =  this.hotelService.getReservacion(this.habitacionId);
 
   if(this.reservaciones[0] === undefined) {
-    this.hotelService.agregarReservacion(this.habitacionId, FechaEntrada ,FechaSalida);
+    this.hotelService.agregarReservacion(this.habitacionId, FechaEntrada ,FechaSalida,this.usuario[0].id);
     this.Router.navigate([`tabs/tab1/lista/${this.habitacionId}/reservacion/confirmacion`]);
     return;
   }else{
@@ -109,7 +109,7 @@ export class ReservacionPage implements OnInit {
      }
   }
    if(j === 0){
-    this.hotelService.agregarReservacion(this.habitacionId,FechaEntrada ,FechaSalida);
+    this.hotelService.agregarReservacion(this.habitacionId,FechaEntrada ,FechaSalida, this.usuario[0].id);
     this.Router.navigate([`tabs/tab1/lista/${this.habitacionId}/reservacion/confirmacion`]);
   }else{
     this.alertCtrl.create({

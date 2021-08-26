@@ -5,6 +5,8 @@ import { Habitacion, Localidad, Tipo } from './tab1.model';
 import { finalize } from 'rxjs/operators';
 import { AlertController } from '@ionic/angular';
 import { reservaciones } from '../tab2/reservaciones.model';
+import { Usuario } from '../tab3/user.model';
+import { FirebaseServiceService } from '../tabs/firebase-service.service';
 
 @Injectable({
   providedIn: 'root'
@@ -50,7 +52,8 @@ export class HotelService {
   constructor(
     public storage: AngularFireStorage,
     private httpClient: HttpClient,
-    private alertCtrl: AlertController
+    private alertCtrl: AlertController,
+    private firebaseService: FirebaseServiceService
   ) {
     this.getTodos();
   }
@@ -217,6 +220,7 @@ getReservaciones(){
           reservacion.push(new reservaciones(
             key,
             restData[key].habitacion,
+            restData[key].idUsuario,
             restData[key].fechaEntrada,
             restData[key].fechaSalida
           ));
@@ -226,23 +230,25 @@ getReservaciones(){
     }
   );
 }
-  getReservacion(idHab: string){
+  getReservacion(filtro: string){
       this.getReservaciones();
       return [...this.reservacion.filter((reservaciones)=>{
-        return reservaciones.habitacion === idHab
+        return reservaciones.habitacion === filtro
      })];
 }
 
-agregarReservacion(idHab: string, fechaEntrada: Date, fechaSalida: Date){
+agregarReservacion(idHab: string, fechaEntrada: Date, fechaSalida: Date, idUsuario: string){
   const reservacion = new reservaciones(
     '0',
     idHab,
+    idUsuario,
     fechaEntrada,
     fechaSalida
   );
   this.httpClient.post<{name: string}>('https://hotel-105b0-default-rtdb.firebaseio.com/reservaciones.json',
   {
-    ...reservacion
+    ...reservacion,
+    id: null
   }).subscribe(
     (restData) => {
       reservacion.id = restData.name;
