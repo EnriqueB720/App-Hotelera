@@ -22,7 +22,7 @@ export class ReservacionPage implements OnInit {
               private hotelService: HotelService,
               private alertCtrl: AlertController,
               private Router: Router,
-              public firebaseService: FirebaseServiceService) {
+              private firebaseService: FirebaseServiceService) {
         this.hotelService.getReservaciones();
    }
 
@@ -93,6 +93,8 @@ export class ReservacionPage implements OnInit {
   this.reservaciones =  this.hotelService.getReservacion(this.habitacionId);
 
   if(this.reservaciones[0] === undefined) {
+    FechaEntrada.setDate(FechaEntrada.getDate() - 1);
+    FechaSalida.setDate(FechaSalida.getDate() - 1);
     this.hotelService.agregarReservacion(this.habitacionId, FechaEntrada ,FechaSalida,this.usuario[0].id);
     this.Router.navigate([`tabs/tab1/lista/${this.habitacionId}/reservacion/confirmacion`]);
     return;
@@ -102,13 +104,14 @@ export class ReservacionPage implements OnInit {
       const fechasDeSalida = new Date(this.reservaciones[i].fechaSalida);
       if((FechaEntrada >= fechasDeEntrada && FechaEntrada <= fechasDeSalida ) ||
         (FechaSalida >= fechasDeEntrada && FechaSalida <= fechasDeSalida) ||
-        ( fechasDeEntrada >= FechaEntrada && fechasDeSalida <= FechaSalida ) ||
         (fechasDeEntrada >= FechaEntrada && fechasDeSalida <= FechaSalida)){
           j++;
       }
      }
   }
    if(j === 0){
+    FechaEntrada.setDate(FechaEntrada.getDate() - 1);
+    FechaSalida.setDate(FechaSalida.getDate() - 1);
     this.hotelService.agregarReservacion(this.habitacionId,FechaEntrada ,FechaSalida, this.usuario[0].id);
     this.Router.navigate([`tabs/tab1/lista/${this.habitacionId}/reservacion/confirmacion`]);
   }else{

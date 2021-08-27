@@ -5,7 +5,6 @@ import { Habitacion, Localidad, Tipo } from './tab1.model';
 import { finalize } from 'rxjs/operators';
 import { AlertController } from '@ionic/angular';
 import { reservaciones } from '../tab2/reservaciones.model';
-import { Usuario } from '../tab3/user.model';
 import { FirebaseServiceService } from '../tabs/firebase-service.service';
 
 @Injectable({
@@ -233,7 +232,7 @@ getReservaciones(){
   getReservacion(filtro: string){
       this.getReservaciones();
       return [...this.reservacion.filter((reservaciones)=>{
-        return reservaciones.habitacion === filtro
+        return reservaciones.habitacion === filtro || reservaciones.idUsuario === filtro
      })];
 }
 

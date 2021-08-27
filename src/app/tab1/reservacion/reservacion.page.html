@@ -7,9 +7,9 @@
 <ion-content>
   <form [formGroup] = "form">
     <ion-label position="floating">fecha de entrada</ion-label>
-    <ion-input type="date" autocomplete autocorrect  formControlName="fechaEntrada"></ion-input>
+    <ion-datetime formControlName="fechaEntrada"></ion-datetime>
     <ion-label position="floating">fecha de salida</ion-label>
-    <ion-input type="date" autocomplete autocorrect  formControlName="fechaSalida"></ion-input>
+    <ion-datetime formControlName="fechaSalida"></ion-datetime>
     <ion-button (click) = "reservar()">Reservar</ion-button>
   </form>
 </ion-content>
