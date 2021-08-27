@@ -49,16 +49,16 @@ ngOnInit(){
     }
   }
 
-  colorRandom(){
+  colorRandom(idHabticacion: string){
     const numero = Math.floor(Math.random() * 4) + 1;
     if(numero === 1){
-      return 'azul';
+      document.getElementById(idHabticacion).className = 'azul';
     }else if (numero === 2){
-      return 'verde';
+      document.getElementById(idHabticacion).className = 'verde';
     }else if(numero === 3){
-      return 'amarillo';
+      document.getElementById(idHabticacion).className = 'amarillo';
     }else{
-      return 'rojo';
+      document.getElementById(idHabticacion).className = 'rojo';
     }
   }
 }

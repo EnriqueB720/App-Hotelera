@@ -5,23 +5,12 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-<!--   <ion-list>
-    <div *ngFor = "let reservacion of reservaciones">
-      <div *ngFor= "let habitacion of habitaciones">
-        <div *ngIf= "habitacion.id === reservacion.habitacion">
-          <p>Habitacion: {{habitacion.id}}</p>
-          <p>ReservacionHab: {{reservacion.habitacion}}</p>
-          <p>idReservacion: {{reservacion.id}}</p>
-        </div>
-      </div>
-    </div>
-  </ion-list> -->
-
   <div *ngFor = "let reservacion of reservaciones">
     <div *ngFor= "let habitacion of habitaciones">
       <div *ngIf= "habitacion.id === reservacion.habitacion">
         <ion-grid>
-          <ion-card [class]="colorRandom()">
+          <ion-card [id]="reservacion.habitacion" class="azul">
+            {{ colorRandom(reservacion.habitacion) }}
             <ion-row>
               <ion-col size="12">
                 <div class="fechas">
