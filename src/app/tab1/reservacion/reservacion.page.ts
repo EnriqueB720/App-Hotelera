@@ -21,7 +21,7 @@ export class ReservacionPage implements OnInit {
   constructor(private activatedRoute: ActivatedRoute,
               private hotelService: HotelService,
               private alertCtrl: AlertController,
-              private Router: Router,
+              private router: Router,
               private firebaseService: FirebaseServiceService) {
         this.hotelService.getReservaciones();
    }
@@ -34,7 +34,7 @@ export class ReservacionPage implements OnInit {
         }
          this.habitacionId = paramMap.get('hash');
       }
-    )
+    );
     this.form = new FormGroup({
       fechaEntrada: new FormControl(null, {
         updateOn: 'blur',
@@ -44,7 +44,7 @@ export class ReservacionPage implements OnInit {
         updateOn: 'blur',
         validators: [Validators.required]
       }),
-    })
+    });
   }
 
   reservar(){
@@ -52,7 +52,7 @@ export class ReservacionPage implements OnInit {
     if(this.firebaseService.userlogued[0] !== undefined){
       this.usuario =  this.firebaseService.userlogued;
     }else{
-      this.Router.navigate(['tabs/tab3/login-page']);
+      this.router.navigate(['tabs/tab3/login-page']);
       return;
     }
 
@@ -70,14 +70,14 @@ export class ReservacionPage implements OnInit {
       return;
     }
 
-    const FechaEntrada = new Date(this.form.value.fechaEntrada);
-    const FechaSalida = new Date(this.form.value.fechaSalida);
+    const fechaEntrada = new Date(this.form.value.fechaEntrada);
+    const fechaSalida = new Date(this.form.value.fechaSalida);
     let j = 0;
     for(let i = 0; i < 1; i++){
       this.hotelService.getReservaciones();
     }
     //Valida que la fecha de entrada sea menor que la de salida
-    if(FechaEntrada >= FechaSalida){
+    if(fechaEntrada >= fechaSalida){
       this.alertCtrl.create({
         header: 'Oops!',
         message: 'Fecha de salida mayor a fecha de entrada.',
@@ -93,27 +93,28 @@ export class ReservacionPage implements OnInit {
   this.reservaciones =  this.hotelService.getReservacion(this.habitacionId);
 
   if(this.reservaciones[0] === undefined) {
-    FechaEntrada.setDate(FechaEntrada.getDate() - 1);
-    FechaSalida.setDate(FechaSalida.getDate() - 1);
-    this.hotelService.agregarReservacion(this.habitacionId, FechaEntrada ,FechaSalida,this.usuario[0].id);
-    this.Router.navigate([`tabs/tab1/lista/${this.habitacionId}/reservacion/confirmacion`]);
+    fechaEntrada.setDate(fechaEntrada.getDate() - 1);
+    fechaSalida.setDate(fechaSalida.getDate() - 1);
+    this.hotelService.agregarReservacion(this.habitacionId, fechaEntrada ,fechaSalida,this.usuario[0].id);
+    this.router.navigate([`tabs/tab1/lista/${this.habitacionId}/reservacion/confirmacion`]);
     return;
   }else{
+    // eslint-disable-next-line @typescript-eslint/prefer-for-of
     for(let i = 0; i < this.reservaciones.length; i++){
       const fechasDeEntrada = new Date(this.reservaciones[i].fechaEntrada);
       const fechasDeSalida = new Date(this.reservaciones[i].fechaSalida);
-      if((FechaEntrada >= fechasDeEntrada && FechaEntrada <= fechasDeSalida ) ||
-        (FechaSalida >= fechasDeEntrada && FechaSalida <= fechasDeSalida) ||
-        (fechasDeEntrada >= FechaEntrada && fechasDeSalida <= FechaSalida)){
+      if((fechaEntrada >= fechasDeEntrada && fechaEntrada <= fechasDeSalida ) ||
+        (fechaSalida >= fechasDeEntrada && fechaSalida <= fechasDeSalida) ||
+        (fechasDeEntrada >= fechaEntrada && fechasDeSalida <= fechaSalida)){
           j++;
       }
      }
   }
    if(j === 0){
-    FechaEntrada.setDate(FechaEntrada.getDate() - 1);
-    FechaSalida.setDate(FechaSalida.getDate() - 1);
-    this.hotelService.agregarReservacion(this.habitacionId,FechaEntrada ,FechaSalida, this.usuario[0].id);
-    this.Router.navigate([`tabs/tab1/lista/${this.habitacionId}/reservacion/confirmacion`]);
+    fechaEntrada.setDate(fechaEntrada.getDate() - 1);
+    fechaSalida.setDate(fechaSalida.getDate() - 1);
+    this.hotelService.agregarReservacion(this.habitacionId,fechaEntrada ,fechaSalida, this.usuario[0].id);
+    this.router.navigate([`tabs/tab1/lista/${this.habitacionId}/reservacion/confirmacion`]);
   }else{
     this.alertCtrl.create({
       header: 'Oops!',
