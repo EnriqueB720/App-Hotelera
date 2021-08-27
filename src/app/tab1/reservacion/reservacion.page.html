@@ -28,20 +28,22 @@
         <p>5 personas</p>
       </div>
       <h2>Estancia</h2>
-      <div class="modulos">
-        <ion-icon slot="icon-only" size="default" name="calendar-number-outline"></ion-icon>
-        <ion-label>Ingreso:</ion-label>
-        <ion-input type="date"></ion-input>
-      </div>
-      <div class="modulos">
-        <ion-icon slot="icon-only" size="default" name="calendar-number-outline"></ion-icon>
-        <ion-label>Salida:</ion-label>
-        <ion-input type="date"></ion-input>
-      </div>
+      <form [formGroup] = "form">
+        <div class="modulos">
+          <ion-icon slot="icon-only" size="default" name="calendar-number-outline"></ion-icon>
+          <ion-label>Ingreso:</ion-label>
+          <ion-datetime (ionChange)="deterNoche()" formControlName="fechaEntrada" placeholder="01/01/2021"></ion-datetime>
+        </div>
+        <div class="modulos">
+          <ion-icon slot="icon-only" size="default" name="calendar-number-outline"></ion-icon>
+          <ion-label>Salida:</ion-label>
+          <ion-datetime (ionChange)="deterNoche()" formControlName="fechaSalida" placeholder="01/01/2021"></ion-datetime>
+        </div>
+      </form>
       <div class="modulos">
         <ion-icon slot="icon-only" size="default" name="moon-outline"></ion-icon>
         <ion-label>Noches:</ion-label>
-        <p>0 noches</p>
+        <p>{{ noches }} noches</p>
       </div>
       <h2>Detalle</h2>
       <div class="modulos">
@@ -53,6 +55,6 @@
         <p>$150</p>
       </div>
     </div>
-    <ion-button class="buscar" expand="full" [routerLink]="['./lista']">Reservar</ion-button>
+    <ion-button class="buscar" expand="full" (click)="deterNoche()">Reservar</ion-button>
   </div>
 </ion-content>
