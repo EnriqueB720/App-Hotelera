@@ -14,34 +14,43 @@ export class HotelService {
   private localidades: Localidad[] = [
     {
       nombre: 'Guanacaste',
-      imagen: 'assets/images/Guanacaste.jpg'
+      imagen: 'assets/images/Guanacaste.jpg',
+      descripcion: 'Guanacaste tiene infinitas playas, con aguas tranquilas y muchas otras para practicar deportes acuaticos'
     },
     {
       nombre: 'Puntarenas',
-      imagen: 'assets/images/Puntarenas.jpg'
+      imagen: 'assets/images/Puntarenas.jpg',
+      descripcion: 'Puntareas, aquí puedes encontrar Paseo de los Turistas, el Parque Marino del Pacífico. '
+                    +'Además puedes encontrar hermosas playas en toda la provincia'
     },
     {
-      nombre: 'Limón',
-      imagen: 'assets/images/Limon.jpg'
+      nombre: 'Limon',
+      imagen: 'assets/images/Limon.jpg',
+      descripcion: 'Limón posee el más alto porcentaje de tierras protegidas en Costa Rica, y posee una extensa variedad de flora y '
+                    +'fauna. Sin mencionar las hermosas playas del caribe'
     },
     {
-      nombre: 'San José',
-      imagen: 'assets/images/San Jose.jpg'
+      nombre: 'San Jose',
+      imagen: 'assets/images/San Jose.jpg',
+      descripcion: ''
     },
   ];
   //Crear tipos de habitacion disponible
   private tipos: Tipo[] = [
     {
       tipo: 'Suite',
-      imagen: 'assets/images/Suite.jpg'
+      imagen: 'assets/images/Suite.jpg',
+      descripcion: 'Habitación grande con todos los lujos que te puedes imaginar'
     },
     {
       tipo: 'Mediana',
-      imagen: 'assets/images/Mediana.jpg'
+      imagen: 'assets/images/Mediana.jpg',
+      descripcion: 'Habitación mediana con todo lo necesario para una familia que desea discfrutar un gran rato'
     },
     {
       tipo: 'Pequeña',
-      imagen: 'assets/images/Pequeña.jpg'
+      imagen: 'assets/images/Pequeña.jpg',
+      descripcion: 'Habitación perfecta para una pareja que desea disfrutar una buenas vacaciones'
     }
   ];
 

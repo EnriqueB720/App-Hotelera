@@ -14,8 +14,10 @@ export class Habitacion{
 export interface Localidad{
   nombre: string;
   imagen: string;
+  descripcion: string;
 }
 export interface Tipo{
   tipo: string;
   imagen: string;
+  descripcion: string;
 }
