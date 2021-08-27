@@ -1,14 +1,12 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Tab 2
-    </ion-title>
+    <ion-title color="primary">ParadiseResort.com</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-list>
-    <div class="reservacion" *ngFor = "let reservacion of reservaciones">
+<!--   <ion-list>
+    <div *ngFor = "let reservacion of reservaciones">
       <div *ngFor= "let habitacion of habitaciones">
         <div *ngIf= "habitacion.id === reservacion.habitacion">
           <p>Habitacion: {{habitacion.id}}</p>
@@ -17,5 +15,37 @@
         </div>
       </div>
     </div>
-  </ion-list>
+  </ion-list> -->
+
+  <div *ngFor = "let reservacion of reservaciones">
+    <div *ngFor= "let habitacion of habitaciones">
+      <div *ngIf= "habitacion.id === reservacion.habitacion">
+        <ion-grid>
+          <ion-card [class]="colorRandom()">
+            <ion-row>
+              <ion-col size="12">
+                <div class="fechas">
+                  <h5>{{ reservacion.fechaEntrada.toString().substring(0, 10) }}  -  {{ reservacion.fechaSalida.toString().substring(0, 10) }}</h5>
+                </div>
+              </ion-col>
+            </ion-row>
+            <ion-card-content>
+              <ion-row>
+                <ion-col size="9">
+                  <ion-label>Habitacion numero: {{ habitacion.numeroHabitacion }}</ion-label>
+                  <br>
+                  <ion-label>Ubicacion: {{ habitacion.ubicacion }}</ion-label>
+                </ion-col>
+                <ion-col  size='2'>
+                  <div class="icono">
+                    <ion-icon color="primary" slot="icon-only" size="large" name="bookmark-outline"></ion-icon>
+                  </div>
+              </ion-col>
+              </ion-row>
+            </ion-card-content>
+          </ion-card>
+        </ion-grid>
+      </div>
+    </div>
+  </div>
 </ion-content>

@@ -19,20 +19,68 @@
           <ion-card *ngIf= " rol !== 'admin' && habitacion.estado === 'Activo' " [routerLink] = "['../lista', habitacion.id]">
             <ion-img [src]="habitacion.imagen"></ion-img>
             <ion-card-header>
-              <ion-card-title>Habitación: {{ habitacion.numeroHabitacion }} - {{ habitacion.tipo }} -  {{ habitacion.ubicacion }}</ion-card-title>
+              <div>
+                <h3>Habitación: {{ habitacion.numeroHabitacion }} <span id="precio">${{ habitacion.precioXNoche }} /noche</span></h3>
+              </div>
             </ion-card-header>
             <ion-card-content>
-              {{ habitacion.descripcion }}
+              <ion-grid>
+                <div>
+                  {{ habitacion.descripcion }}
+                </div>
+                <ion-row>
+                  <ion-col>
+                    <span class="icono">
+                      <div id="cantPersonas">
+                        <ion-icon slot="icon-only" size="default" name="people-outline"></ion-icon>
+                        <p class="textoIcono">{{ habitacion.cantMaxPersonas }} personas</p>
+                      </div>
+                    </span>
+                  </ion-col>
+                  <ion-col>
+                    <span class="icono">
+                      <div id="tipo">
+                        <ion-icon slot="icon-only" size="default" name="expand-outline"></ion-icon>
+                        <p class="textoIcono">{{ habitacion.tipo }}</p>
+                      </div>
+                    </span>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
             </ion-card-content>
           </ion-card>
           <!--Con administrador logueado-->
           <ion-card *ngIf= " rol === 'admin' && (habitacion.estado === 'Activo' || habitacion.estado === 'Inactivo') " [routerLink] = "['../lista', habitacion.id]">
             <ion-img [src]="habitacion.imagen"></ion-img>
             <ion-card-header>
-              <ion-card-title>Habitación: {{ habitacion.numeroHabitacion }} - {{ habitacion.tipo }} -  {{ habitacion.ubicacion }}</ion-card-title>
+              <div>
+                <h3>Habitación: {{ habitacion.numeroHabitacion }} <span id="precio">${{ habitacion.precioXNoche }} /noche</span></h3>
+              </div>
             </ion-card-header>
             <ion-card-content>
-              {{ habitacion.descripcion }}
+              <ion-grid>
+                <div>
+                  {{ habitacion.descripcion }}
+                </div>
+                <ion-row>
+                  <ion-col>
+                    <span class="icono">
+                      <div id="cantPersonas">
+                        <ion-icon slot="icon-only" size="default" name="people-outline"></ion-icon>
+                        <p class="textoIcono">{{ habitacion.cantMaxPersonas }} personas</p>
+                      </div>
+                    </span>
+                  </ion-col>
+                  <ion-col>
+                    <span class="icono">
+                      <div id="tipo">
+                        <ion-icon slot="icon-only" size="default" name="expand-outline"></ion-icon>
+                        <p class="textoIcono">{{ habitacion.tipo }}</p>
+                      </div>
+                    </span>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
             </ion-card-content>
           </ion-card>
         </ion-col>

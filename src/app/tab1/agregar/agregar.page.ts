@@ -67,6 +67,7 @@ export class AgregarPage implements OnInit {
       const res = await this.hotelService.cargarNuevaImagen(this.nuevoArchivo, path, nombre);
       this.imagen = res;
     }
+    console.log(this.form.value.ubicacion);
     this.hotelService.agregarHabitacion(
       '0',
       this.form.value.ubicacion,

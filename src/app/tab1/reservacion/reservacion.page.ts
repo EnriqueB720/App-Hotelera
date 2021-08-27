@@ -6,6 +6,7 @@ import { reservaciones } from 'src/app/tab2/reservaciones.model';
 import { Usuario } from 'src/app/tab3/user.model';
 import { FirebaseServiceService } from 'src/app/tabs/firebase-service.service';
 import { HotelService } from '../hotel.service';
+import { Habitacion } from '../tab1.model';
 
 @Component({
   selector: 'app-reservacion',
@@ -13,9 +14,10 @@ import { HotelService } from '../hotel.service';
   styleUrls: ['./reservacion.page.scss'],
 })
 export class ReservacionPage implements OnInit {
-
+  habitacion: Habitacion;
   habitacionId: string;
   form: FormGroup;
+  noches = 0;
   reservaciones: reservaciones[] = [];
   usuario: Usuario[];
   constructor(private activatedRoute: ActivatedRoute,
@@ -33,19 +35,19 @@ export class ReservacionPage implements OnInit {
           return;
         }
          this.habitacionId = paramMap.get('hash');
+         this.habitacion = this.hotelService.getHabitacion(this.habitacionId);
       }
     );
     this.form = new FormGroup({
       fechaEntrada: new FormControl(null, {
-        updateOn: 'blur',
         validators: [Validators.required]
       }),
       fechaSalida: new FormControl(null, {
-        updateOn: 'blur',
         validators: [Validators.required]
       }),
     });
   }
+
 
   reservar(){
     //Valida si el uusario esta logueado para hacer la reservacion
@@ -128,4 +130,18 @@ export class ReservacionPage implements OnInit {
   }
   }
 
+  deterNoche(){
+    this.noches = 0;
+    if(this.form.invalid) {return;}
+    const ingreso = new Date(this.form.value.fechaEntrada);
+    const salida = new Date(this.form.value.fechaSalida);
+    if(ingreso <= salida){
+    const diff = Math.abs(salida.getTime() - ingreso.getTime());
+    const diffDays = Math.ceil(diff / (1000 * 3600 * 24) - 1);
+    this.noches = diffDays;
+    console.log(diffDays);
+    }else{
+      this.noches = 0;
+    }
+  }
 }

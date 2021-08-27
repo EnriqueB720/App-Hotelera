@@ -19,7 +19,9 @@ export class Tab2Page implements OnInit{
                 this.hotelService.getReservaciones();
               }
 ngOnInit(){
+  // eslint-disable-next-line @typescript-eslint/prefer-for-of
   for(let i = 0; i < this.reservaciones.length; i++){
+    // eslint-disable-next-line arrow-body-style
     if(this.habitaciones.find((habitacion)=> {
       return habitacion.id === this.reservaciones[i].habitacion;}) === undefined){
         this.habitaciones.push(
@@ -33,7 +35,9 @@ ngOnInit(){
     if(this.firebaseService.userlogued[0] !== undefined){
         this.usuario =  this.firebaseService.userlogued;
         this.reservaciones = this.hotelService.getReservacion(this.usuario[0].id);
+    // eslint-disable-next-line @typescript-eslint/prefer-for-of
     for(let i = 0; i < this.reservaciones.length; i++){
+      // eslint-disable-next-line arrow-body-style
       if(this.habitaciones.find((habitacion)=> {
         return habitacion.id === this.reservaciones[i].habitacion;}) === undefined){
           this.habitaciones.push(
@@ -45,4 +49,16 @@ ngOnInit(){
     }
   }
 
+  colorRandom(){
+    const numero = Math.floor(Math.random() * 4) + 1;
+    if(numero === 1){
+      return 'azul';
+    }else if (numero === 2){
+      return 'verde';
+    }else if(numero === 3){
+      return 'amarillo';
+    }else{
+      return 'rojo';
+    }
+  }
 }

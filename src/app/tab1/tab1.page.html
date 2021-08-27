@@ -1,6 +1,6 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>Inicio</ion-title>
+    <ion-title color="primary">ParadiseResort.com</ion-title>
     <ion-buttons slot="end">
       <ion-button *ngIf= " rol === 'admin' " fill="outline" size="small" color="primary" [routerLink]="['./agregar']">Agregar</ion-button>
     </ion-buttons>
@@ -8,46 +8,47 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
+  <ion-button expand="full" fill="outline" color="primary" [routerLink]="['./lista']">Ver Todos</ion-button>
   <ion-grid>
     <ion-row>
+      <strong class="title">Ubicación</strong>
       <ion-col>
-        <ion-buttons>
-          <strong class="title">Ubicación</strong>
-          <ion-button id="todos" fill="outline" size="small" color="primary" [routerLink]="['./lista']">Ver Todos</ion-button>
-        </ion-buttons>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col>
-        <ion-slides pager="false">
+        <ion-slides pager="true">
           <ion-slide *ngFor =" let localidad of localidades">
-            <ion-card [routerLink]= "['./' , localidad.nombre]">
-              <ion-img src="{{localidad.imagen}}"></ion-img>
-              <ion-card-header>
-                <ion-card-title>{{localidad.nombre}}</ion-card-title>
-              </ion-card-header>
-            </ion-card>
+            <div [routerLink]= "['./' , localidad.nombre]">
+              <ion-card>
+                <ion-img src="{{localidad.imagen}}"></ion-img>
+              </ion-card>
+              <div class="subtitle">
+                <span>{{localidad.nombre}}</span>
+              </div>
+              <div class="texto">
+                <p>{{ localidad.descripcion }}</p>
+              </div>
+            </div>
           </ion-slide>
         </ion-slides>
       </ion-col>
     </ion-row>
-
     <ion-row>
       <strong class="title">Tipo</strong>
       <ion-col>
-        <ion-slides pager="false">
+        <ion-slides pager="true">
           <ion-slide *ngFor =" let tipo of tipos">
-            <ion-card [routerLink]= "['./' , tipo.tipo]">
-              <ion-img src="{{tipo.imagen}}"></ion-img>
-              <ion-card-header>
-                <ion-card-title>{{tipo.tipo}}</ion-card-title>
-              </ion-card-header>
-            </ion-card>
+            <div [routerLink]= "['./' , tipo.tipo]">
+              <ion-card>
+                <ion-img src="{{tipo.imagen}}"></ion-img>
+              </ion-card>
+              <div class="subtitle">
+                <span>{{tipo.tipo}}</span>
+              </div>
+              <div class="texto">
+                <p>{{ tipo.descripcion }}</p>
+              </div>
+            </div>
           </ion-slide>
         </ion-slides>
       </ion-col>
     </ion-row>
-
-
   </ion-grid>
 </ion-content>
