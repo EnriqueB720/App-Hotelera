@@ -9,8 +9,7 @@
     <div *ngFor= "let habitacion of habitaciones">
       <div *ngIf= "habitacion.id === reservacion.habitacion">
         <ion-grid>
-          <ion-card [id]="reservacion.habitacion" class="azul">
-            {{ colorRandom(reservacion.habitacion) }}
+          <ion-card>
             <ion-row>
               <ion-col size="12">
                 <div class="fechas">
