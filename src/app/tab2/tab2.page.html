@@ -5,6 +5,11 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
+  <div *ngIf="reservaciones[0] === undefined">
+    <ion-card>
+      <p>No cuenta con reservaciones disponibles</p>
+    </ion-card>
+  </div>
   <div *ngFor = "let reservacion of reservaciones">
     <div *ngFor= "let habitacion of habitaciones">
       <div *ngIf= "habitacion.id === reservacion.habitacion">
