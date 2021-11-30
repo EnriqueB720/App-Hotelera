@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Usuario } from '../tab3/user.model';
 import { HttpClient } from '@angular/common/http';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -26,7 +27,7 @@ private usuarios: Usuario[] = [];
                 restData[key].email,
                 restData[key].contrasena,
                 restData[key].rol,
-                restData[key].img
+                restData[key].img,
                 ));
             }
           }

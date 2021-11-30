@@ -4,12 +4,15 @@ import { AngularFireStorage } from '@angular/fire/storage';
 import { Habitacion, Localidad, Tipo } from './tab1.model';
 import { finalize } from 'rxjs/operators';
 import { AlertController } from '@ionic/angular';
+import { reservaciones } from '../tab2/reservaciones.model';
+import { FirebaseServiceService } from '../tabs/firebase-service.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HotelService {
   private habitaciones: Habitacion[] = [];
+  private reservacion: reservaciones[]  = [];
   //Crear localidades disponibles
   private localidades: Localidad[] = [
     {
@@ -48,7 +51,8 @@ export class HotelService {
   constructor(
     public storage: AngularFireStorage,
     private httpClient: HttpClient,
-    private alertCtrl: AlertController
+    private alertCtrl: AlertController,
+    private firebaseService: FirebaseServiceService
   ) {
     this.getTodos();
   }
@@ -205,4 +209,50 @@ export class HotelService {
       return true;
     }
   }
+getReservaciones(){
+  this.httpClient.get<{ [key: string]: reservaciones } >('https://hotel-105b0-default-rtdb.firebaseio.com/reservaciones.json')
+  .subscribe(
+    restData => {
+      const reservacion = [];
+      for( const key in restData){
+        if( restData.hasOwnProperty(key) ){
+          reservacion.push(new reservaciones(
+            key,
+            restData[key].habitacion,
+            restData[key].idUsuario,
+            restData[key].fechaEntrada,
+            restData[key].fechaSalida
+          ));
+        }
+      }
+      this.reservacion = reservacion;
+    }
+  );
+}
+  getReservacion(filtro: string){
+      this.getReservaciones();
+      return [...this.reservacion.filter((reservaciones)=>{
+        return reservaciones.habitacion === filtro || reservaciones.idUsuario === filtro
+     })];
+}
+
+agregarReservacion(idHab: string, fechaEntrada: Date, fechaSalida: Date, idUsuario: string){
+  const reservacion = new reservaciones(
+    '0',
+    idHab,
+    idUsuario,
+    fechaEntrada,
+    fechaSalida
+  );
+  this.httpClient.post<{name: string}>('https://hotel-105b0-default-rtdb.firebaseio.com/reservaciones.json',
+  {
+    ...reservacion,
+    id: null
+  }).subscribe(
+    (restData) => {
+      reservacion.id = restData.name;
+    }
+  );
+  this.getReservaciones();
+}
 }

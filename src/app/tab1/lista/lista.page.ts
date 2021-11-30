@@ -25,6 +25,7 @@ export class ListaPage{
       this.activatedRoutes.paramMap.subscribe(
         paramMap => {
           if(!paramMap.has('Filtro')){
+
             setTimeout(() =>
             {this.habitaciones = this.hotelServicio.getTodos();
             },50);
@@ -43,10 +44,26 @@ export class ListaPage{
       this.usuario =  this.firebaseService.userlogued;
       this.rol = this.usuario[0].rol;
     }
-    this.ionViewDidEnter();
   }
+
   ionViewDidEnter(){
-    this.habitaciones = this.hotelServicio.getTodos();
+    setTimeout(() => {
+      this.activatedRoutes.paramMap.subscribe(
+        paramMap => {
+          if(!paramMap.has('Filtro')){
+
+            setTimeout(() =>
+            {this.habitaciones = this.hotelServicio.getTodos();
+            },50);
+          }else{
+            const filtro = paramMap.get('Filtro');
+            setTimeout(() => {
+              this.habitaciones = this.hotelServicio.getHabitacionesFiltradas(filtro);
+            }, 50);
+          }
+        }
+      );
+    }, 150);
   }
 
   //Refresher (Ionic Component) por si la habitacion nueva o una modificacion no se visualiza

@@ -1,0 +1,15 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>reservacion</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup] = "form">
+    <ion-label position="floating">fecha de entrada</ion-label>
+    <ion-datetime formControlName="fechaEntrada"></ion-datetime>
+    <ion-label position="floating">fecha de salida</ion-label>
+    <ion-datetime formControlName="fechaSalida"></ion-datetime>
+    <ion-button (click) = "reservar()">Reservar</ion-button>
+  </form>
+</ion-content>
